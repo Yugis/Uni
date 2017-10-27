@@ -1,0 +1,283 @@
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+html, body {
+  height: 100%;
+  background: linear-gradient(to top, #ff0066 0%, #ff99ff 100%);
+}
+
+#app {
+  height: 100%;
+}
+
+#coursetrue {
+  background: green;
+  color: white;
+}
+
+#coursefalse {
+  background: red;
+  color: #ffff66;
+}
+#panel-top {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+#panel-body {
+  display: flex;
+  flex: 1;
+}
+
+#flash-success {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 10;
+}
+
+#notification-info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 10;
+}
+
+
+#postarea{
+  border: 1px solid lightgray;
+  float: right;
+}
+
+#statusButton{
+  display: flex;
+  flex-direction: column;
+}
+
+.spinner {
+  height: 50px;
+  width: 50px;
+  background: whitesmoke;
+  border-radius: 50px;
+  border: 4px solid transparent;
+  border-top-color: orangered;
+  border-bottom-color: orangered;
+  animation: spinny 1s linear infinite;
+  display: block;
+
+  @keyframes spinny {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.temp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-spacing-top {
+  padding-top: 20px;
+}
+
+.row.dashboard-flex {
+  display: flex;
+  justify-content: center;
+  padding-top: 35px;
+  text-align: center;
+}
+
+.row.panels-flex {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.first-panel {
+  display: flex;
+  width: 30%;
+}
+
+.second-panel {
+  display: flex;
+  width: 30%;
+}
+
+.third-panel {
+  display: flex;
+  width: 30%;
+}
+
+.templinks {
+  color: #ff0060;
+  border: 1px solid #ff0060;
+  text-decoration: none;
+  padding: 10px;
+  display: ruby-text;
+  border-radius: 5px;
+  font-family: Arial;
+}
+
+.templinks:hover, .templinks:focus {
+  color: white;
+  background-color: #ff0060;
+  border: 1px solid #ff0060;
+  text-decoration: none;
+}
+
+.container-index {
+  height: 470px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.course-index-heading {
+  min-height: 20%;
+  display: flex;
+  justify-content: center;
+  font-style: italic;
+  font-family: serif;
+}
+
+.course-index-heading h2, h3 {
+  color: #ff0066;
+}
+
+.students-index-flex {
+  height: 60%;
+  width: 100%;
+  display: flex;
+  font-style: italic;
+  font-size: 18px;
+  color: #ff0066;
+}
+
+.table {
+  color: #ff5050;
+}
+
+thead {
+  border: 1px double;
+}
+
+tr {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+}
+
+th {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  min-width: 25%;
+}
+
+td {
+  border: 1px double;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 25%;
+  flex: 1;
+  flex-direction: column;
+}
+
+tbody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: transparent;
+}
+
+.panel-primary > .panel-heading {
+  color: #ffff66;
+  background-color: #3097D1;
+  border-color: #3097D1;
+}
+
+.panel-danger {
+  // border-color: #ffccff;
+  border-color: #ff157b;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-danger > .panel-heading {
+  color: #ffff66;
+  background-color: #ff0066;
+  border-color: #ff157b;
+  // border-color: #ffccff;
+}
+
+.navbar-default {
+  background-color: #FF5050;
+  border-color: #d3e0e9;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+  color: #ffff66;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  color: #ffff66;
+  background-color: transparent;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: white;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #ffff66;
+  background-color: transparent;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.Pmodal {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+}

@@ -5,7 +5,6 @@ Route::get('/', function () {
 
 Route::get('home', 'HomeController@index');
 
-
 // Authentication
 Auth::routes();
 

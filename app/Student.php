@@ -22,7 +22,7 @@ class Student extends Authenticatable
 
   public function courses()
   {
-    return $this->belongsToMany('App\Course')->withPivot('completed')->withTimestamps();
+    return $this->belongsToMany('App\Course')->withPivot('completed', 'finals', 'grades', 'attendance')->withTimestamps();
   }
 
   public function profile()

@@ -21,6 +21,17 @@ class StudentsController extends Controller
       $this->middleware(['guest:instructor,web'])->except(['index', 'check']);
     }
 
+
+    //This is how you update pivot table attributes
+    /*
+    public function testing(Request $request)
+    {
+      $grades = Auth::user()->courses->first()->pivot;
+      $grades->grades += 10;
+      $grades->save();
+      dd($grades->grades);
+    } */
+
     public function check($id)
     {
       $student = Auth::user();

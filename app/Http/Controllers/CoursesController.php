@@ -16,6 +16,31 @@ class CoursesController extends Controller
     $this->middleware('auth:web,instructor')->except(['create', 'store']);
   }
 
+  // Managing Attendance
+  /*
+  public function test()
+  {
+    $course = Course::where(['name' => 'Image Processing'])->first();
+
+    $course->attendance = 23;
+
+    $course->save();
+    // dump($course->students);
+    foreach($course->students as $student) {
+      // $s = $student->courses->first()->pivot;
+      // $s->attendance += 1;
+      // $s->save();
+      // dump($student->courses->first()->pivot->attendance);
+      // dump($course->attendance);
+      if($student->courses->first()->pivot->attendance / $course->attendance * 100 < 50){
+        return 'Danger';
+      } else {
+        return 'Safe';
+      }
+    }
+  }
+  */
+
   public function myCourses()
   {
     $courses = Auth::user()->courses;

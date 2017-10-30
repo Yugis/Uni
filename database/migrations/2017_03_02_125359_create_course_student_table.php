@@ -17,6 +17,9 @@ class CreateCourseStudentTable extends Migration
       $table->increments('id');
       $table->integer('student_id');
       $table->integer('course_id');
+      $table->integer('finals')->default(0)->unsigned();
+      $table->integer('grades')->default(0)->unsigned();
+      $table->integer('attendance')->default(0)->unsigned();
       $table->boolean('completed')->default(false);
       $table->timestamps();
     });

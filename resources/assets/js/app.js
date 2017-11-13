@@ -6,7 +6,7 @@ Vue.component('notification', require('./components/Notification.vue'));
 Vue.component('unread', require('./components/UnreadNots.vue'));
 Vue.component('posting', require('./components/Posting.vue'));
 Vue.component('feed', require('./components/Feed.vue'));
-Vue.component('edit-profile-modal', require('./components/EditProfileModal.vue'));
+// Vue.component('edit-profile-modal', require('./components/EditProfileModal.vue'));
 
 import { store } from './store'
 
@@ -15,6 +15,6 @@ const app = new Vue({
     store,
 
     data: {
-        showModal: false
+        // showModal: false
       }
 });

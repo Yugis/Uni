@@ -60,14 +60,14 @@ class CoursesController extends Controller
   {
     $faculty = Faculty::where('name', $request->facultyName)->first();
     $year = Year::where('name', $request->yearName)->first();
-    $course = Course::create(['name' => $request->courseName, 'faculty_id' => $faculty->id, 'year_id' => $year->id]);
+    $course = Course::create(['name' => $request->courseName, 'slug' => str_slug($request->courseName, '-'), 'faculty_id' => $faculty->id, 'year_id' => $year->id]);
 
     return redirect('create.course');
   }
 
-  public function show($name)
+  public function show($slug)
   {
-    $course = Course::where(['name' => $name])->first();
+    $course = Course::where(['slug' => $slug])->first();
 
     return view('courses.show', compact('course'));
   }

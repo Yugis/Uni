@@ -7,6 +7,7 @@
     <div class="container-index">
     	<div class="course-index-heading">
       <h1> {{ $course->name }} </h1>
+      {{-- <a href="{{ route('quiz.create') }}" class="templinks"></a> --}}
     </div>
         <div class="students-index-flex">
           <table class="table">
@@ -20,7 +21,7 @@
             <tbody>
               @foreach ($course->students as $student)
                   <tr>
-                    <td><a href="{{ route('student.profile', ['id' => $student->id, 'slug' => $student->slug ]) }}">{{ $student->full_name }}</a></td>
+                    <td><a style="text-decoration:none;" href="{{ route('student.profile', ['id' => $student->id, 'slug' => $student->slug ]) }}">{{ $student->full_name }}</a></td>
                     <td>{{ $student->faculty()->first()->name }}</td>
                     <td>{{ $student->email }}</td>
                   </tr>
@@ -29,8 +30,5 @@
           </table>
     </div>
   </div>
-  </div
-
-
-
+</div>
 @endsection

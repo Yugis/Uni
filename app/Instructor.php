@@ -43,6 +43,11 @@ class Instructor extends Authenticatable
     return $this->belongsToMany('App\Student', 'instructor_students')->withTimestamps();
   }
 
+  public function secret_id()
+  {
+    return $this->hasOne('App\SecretIds');
+  }
+
   public function coursesPerFaculty($id)
   {
    return $this->courses()->where('faculty_id', $id)->pluck('name')->toArray();

@@ -28,7 +28,7 @@
                               <label for="last_name" class="col-md-4 control-label">Last Name</label>
 
                               <div class="col-md-6">
-                                  <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required autofocus>
+                                  <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required>
 
                                   @if ($errors->has('last_name'))
                                       <span class="help-block">
@@ -42,7 +42,7 @@
                               <label for="job_id" class="col-md-4 control-label">Job ID</label>
 
                               <div class="col-md-6">
-                                  <input id="job_id" type="password" class="form-control" name="job_id" value="{{ old('job_id') }}" placeholder="Please provide your instructor ID..." required>
+                                  <input id="job_id" type="password" class="form-control" name="job_id" placeholder="Please provide your instructor ID..." required>
 
                                   @if ($errors->has('job_id'))
                                       <span class="help-block">
@@ -122,6 +122,24 @@
                               </div>
                           </div>
 
+                          <div class="form-group{{ $errors->has('job_title') ? ' has-error' : '' }}">
+                              <label for="job_title" class="col-md-4 control-label">Job Title</label>
+
+                              <div class="col-md-6">
+                                  <select name="job_title" id="job_title" class="form-control">
+                                    <option value="" disabled selected>Please select your Job Title</option>
+                                    <option value="Professor">Professor</option>
+                                    <option value="Teaching Assistant">Teaching Assistant</option>
+                                  </select>
+
+                                  @if ($errors->has('job_title'))
+                                      <span class="help-block">
+                                          <strong>{{ $errors->first('job_title') }}</strong>
+                                      </span>
+                                  @endif
+                              </div>
+                          </div>
+
                           <div class="form-group{{ $errors->has('gender') ? ' has-error' : '' }}">
                               <label for="gender" class="col-md-4 control-label">Gender</label>
 
@@ -142,7 +160,7 @@
 
 
               						<div class="form-group{{ $errors->has('faculty_name') ? ' has-error' : '' }}">
-                            <label for="faculty_name" class="col-md-4 control-label">Please select the faculties you're working with currentley</label>
+                            <label for="faculty_name" class="col-md-4 control-label">Please select the faculties you're working with currently</label>
 
               							<div class="col-md-6 btn-group">
               								 <select id="faculty_name" type="select" class="form-control" name="faculty_name[]" multiple="multiple" required>

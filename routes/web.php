@@ -33,7 +33,7 @@ Route::get('students', 'StudentsController@index')->middleware(['auth:web,instru
 
 Route::get('/instructors', 'InstructorsController@all')->name('all.instructors')->middleware(['auth:web,instructor']);
 
-Route::get('/courses/{name}', 'CoursesController@show')->name('courses.show');
+Route::get('/courses/{slug}', 'CoursesController@show')->name('courses.show');
 
 Route::get('/MyCourses', 'CoursesController@myCourses')->name('student.mycourses');
 
@@ -54,9 +54,20 @@ Route::post('mark_as_read', function() {
 
 Route::get('get_related_posts/{id}', 'PostsController@feed');
 
+// Create A New Quiz.
+// Route::get('/quiz');
+
+
 
 // Temporary Routes To Create Courses And Faculties.
 Route::get('create.faculty', 'FacultyController@create');
-Route::get('create.course', 'CoursesController@create');
 Route::post('create.faculty', 'FacultyController@store');
+Route::get('create.course', 'CoursesController@create');
 Route::post('create.course', 'CoursesController@store');
+// Create Questions & Quizzes.
+Route::get('create.questions', 'QuestionsController@create')->middleware('auth:instructor')->name('questions.create');
+Route::post('create.questions', 'QuestionsController@store');
+// Route::get('create.quiz');
+
+
+Route::get('/test', 'StudentsController@test');

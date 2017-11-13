@@ -18,7 +18,7 @@
         <tbody>
             @foreach ($courses as $course)
               <tr>
-                <td><a href="{{ route('courses.show', ['name' => $course->name]) }}">{{ $course->name }}</a></td>
+                <td><a href="{{ route('courses.show', ['name' => $course->slug]) }}">{{ $course->name }}</a></td>
                 <td>{{ $course->appointment }}</td>
                 <td>{{ $course->room_id }}</td>
              </tr>

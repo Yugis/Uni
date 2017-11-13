@@ -96,6 +96,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     @if(Auth::guard('instructor')->check())
                                     <li><a href="{{ route('instructor.profile', ['id' => Auth::user()->id, 'slug' => Auth::user()->slug ]) }}">My profile</a></li>
+                                    <li><a href="{{ route('questions.create')}}">Create Questions</a></li>
                                     @else
                                     <li><a href="{{ route('student.profile', ['id' => Auth::user()->id, 'slug' => Auth::user()->slug ]) }}">My profile</a></li>
                                     @endif

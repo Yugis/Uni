@@ -13,7 +13,8 @@ class Course extends Model
       'year_id',
       'description',
       'appointment',
-      'room_id'
+      'room_id',
+      'slug'
   ];
 
   public function faculty()
@@ -29,5 +30,10 @@ class Course extends Model
   public function students()
   {
     return $this->belongsToMany('App\Student');
+  }
+
+  public function questions()
+  {
+    return $this->hasMany('App\Question');
   }
 }

@@ -47,47 +47,45 @@ class InstructorsController extends Controller
       'course_name' => 'required',
       'phone_number' => 'required|unique:instructors,phone_number|digits:11',
       'password' => 'required|min:4|confirmed'
-  ]);
+    ]);
 
-  $valid_ids = array(1111, 1234, 2222, 1379, 5555);
+    $valid_ids = array(1111, 1234, 2222, 1379, 5555);
 
-  if(in_array($request->job_id, $valid_ids)) {
-    $job_id = $request->job_id;
-  } else {
-    \Session::flash('fail', 'Error, job ID is invalid!');
-    return redirect()->back();
-  }
+    if(in_array($request->job_id, $valid_ids)) {
+      $job_id = $request->job_id;
+    } else {
+      \Session::flash('fail', 'Error, job ID is invalid!');
+      return redirect()->back();
+    }
 
-  if($request->gender)
-  {
-    $avatar = 'public/defaults/avatars/male.png';
-  }
-  else
-  {
-    $avatar = 'public/defaults/avatars/female.png';
-  }
+    if($request->gender)
+    {
+      $avatar = 'public/defaults/avatars/male.png';
+    } else {
+      $avatar = 'public/defaults/avatars/female.png';
+    }
 
-  $instructor = new Instructor();
-  $instructor->job_id = $job_id;
-  $instructor->first_name = ucfirst($request->first_name);
-  $instructor->last_name = ucfirst($request->last_name);
-  $instructor->full_name = $instructor->first_name . ' ' . $instructor->last_name;
-  $instructor->slug = str_slug($instructor->first_name . ' ' . $instructor->last_name, '-');
-  $instructor->gender = $request->gender;
-  $instructor->avatar = $avatar;
-  $instructor->email = $request->email;
-  $instructor->phone_number = $request->phone_number;
-  $instructor->password = bcrypt($request->password);
-  $instructor->office_location = $request->office_location;
-  $instructor->save();
-  $instructor->faculties()->attach($request->faculty_name);
-  $instructor->courses()->attach($request->course_name);
+    $instructor = new Instructor();
+    $instructor->job_id = $job_id;
+    $instructor->first_name = ucfirst($request->first_name);
+    $instructor->last_name = ucfirst($request->last_name);
+    $instructor->full_name = $instructor->first_name . ' ' . $instructor->last_name;
+    $instructor->slug = str_slug($instructor->first_name . ' ' . $instructor->last_name, '-');
+    $instructor->gender = $request->gender;
+    $instructor->avatar = $avatar;
+    $instructor->email = $request->email;
+    $instructor->phone_number = $request->phone_number;
+    $instructor->password = bcrypt($request->password);
+    $instructor->office_location = $request->office_location;
+    $instructor->save();
+    $instructor->faculties()->attach($request->faculty_name);
+    $instructor->courses()->attach($request->course_name);
 
-  Instructor_profile::create(['instructor_id' => $instructor->id]);
+    Instructor_profile::create(['instructor_id' => $instructor->id]);
 
-  Auth::guard('instructor')->login($instructor);
+    Auth::guard('instructor')->login($instructor);
 
-  return redirect('/instructor');
+    return redirect('/instructor');
   }
 
   public function myCourses()

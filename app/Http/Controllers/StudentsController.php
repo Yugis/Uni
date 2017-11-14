@@ -21,6 +21,11 @@ class StudentsController extends Controller
     $this->middleware(['guest:instructor,web'])->except(['index', 'check']);
   }
 
+  public function test()
+  {
+    return \App\SecretIds::all();
+  }
+
 
   //This is how you update pivot table attributes
   /*

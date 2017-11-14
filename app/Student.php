@@ -38,6 +38,10 @@ class Student extends Authenticatable
   public function isFollowing()
   {
     return $this->belongsToMany('App\Instructor', 'instructor_students')->withTimestamps();
+  }
 
+  public function secret_id()
+  {
+    return $this->hasOne('App\SecretIds');
   }
 }

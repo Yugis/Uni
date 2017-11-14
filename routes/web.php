@@ -68,3 +68,6 @@ Route::post('create.course', 'CoursesController@store');
 Route::get('create.questions', 'QuestionsController@create')->middleware('auth:instructor')->name('questions.create');
 Route::post('create.questions', 'QuestionsController@store');
 // Route::get('create.quiz');
+
+
+Route::get('/test', 'StudentsController@test');

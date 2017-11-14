@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Course;
 use App\Faculty;
+use App\SecretIds;
 use App\Instructor;
 use App\Instructor_profile;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class InstructorsController extends Controller
 {
@@ -37,10 +39,13 @@ class InstructorsController extends Controller
 
   public function store(Request $request)
   {
+    $first_job_id = \App\SecretIds::where(['tag' => 'Instructor'])->first();
+    $last_job_id = \App\SecretIds::where(['tag' => 'Instructor'])->get()->last();
     $this->validate($request, [
       'first_name' => 'required|max:30',
       'last_name' => 'required|max:30',
-      'job_id' => 'required',
+      'job_title' => 'required',
+      'job_id' => 'required|exists:secret_ids,id',
       'gender' => 'required|bool',
       'email' => 'required|unique:instructors,email|email',
       'faculty_name' => 'required',
@@ -49,13 +54,11 @@ class InstructorsController extends Controller
       'password' => 'required|min:4|confirmed'
     ]);
 
-    $valid_ids = array(1111, 1234, 2222, 1379, 5555);
+    $valid_ids = SecretIds::where(['tag' => 'Instructor', 'instructor_id' => null])->get()->pluck('id')->toArray();
 
-    if(in_array($request->job_id, $valid_ids)) {
-      $job_id = $request->job_id;
-    } else {
+    if(!in_array($request->job_id, $valid_ids)) {
       \Session::flash('fail', 'Error, job ID is invalid!');
-      return redirect()->back();
+      return redirect()->back()->withInput();
     }
 
     if($request->gender)
@@ -66,7 +69,8 @@ class InstructorsController extends Controller
     }
 
     $instructor = new Instructor();
-    $instructor->job_id = $job_id;
+    $instructor->job_title = $request->job_title;
+    // $instructor->job_id = $request->job_id;
     $instructor->first_name = ucfirst($request->first_name);
     $instructor->last_name = ucfirst($request->last_name);
     $instructor->full_name = $instructor->first_name . ' ' . $instructor->last_name;
@@ -80,6 +84,8 @@ class InstructorsController extends Controller
     $instructor->save();
     $instructor->faculties()->attach($request->faculty_name);
     $instructor->courses()->attach($request->course_name);
+
+    SecretIds::where('id', $request->job_id)->first()->update(['instructor_id' => $instructor->id]);
 
     Instructor_profile::create(['instructor_id' => $instructor->id]);
 

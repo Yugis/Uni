@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Auth;
-use App\Http\Requests;
-use App\Instructor_student;
-use App\Student;
-use App\Faculty;
 use App\Year;
 use App\Course;
-use App\Student_profile;
+use App\Faculty;
+use App\Student;
+use App\SecretIds;
 use App\Instructor;
+use App\Http\Requests;
+use App\Student_profile;
+use App\Instructor_student;
 
 class StudentsController extends Controller
 {
@@ -75,9 +76,13 @@ public function create()
 
 public function store(Request $request)
 {
+  $first_student_id = \App\SecretIds::where(['tag' => 'Student'])->first();
+  $last_student_id = \App\SecretIds::where(['tag' => 'Student'])->get()->last();
+
   $this->validate($request, [
     'first_name' => 'required|max:30',
     'last_name' => 'required|max:30',
+    'student_id' => 'required|exists:secret_ids,id',
     'gender' => 'required|bool',
     'email' => 'required|unique:students,email|email',
     'faculty_name' => 'required',
@@ -85,6 +90,13 @@ public function store(Request $request)
     'phone_number' => 'required|unique:students,phone_number|digits:11',
     'password' => 'required|min:4|confirmed'
   ]);
+
+  $valid_ids = SecretIds::where(['tag' => 'Student', 'student_id' => null])->get()->pluck('id')->toArray();
+
+  if(!in_array($request->student_id, $valid_ids)) {
+    \Session::flash('fail', 'Error, job ID is invalid!');
+    return redirect()->back()->withInput();
+  }
 
   if($request->gender)
   {
@@ -109,6 +121,8 @@ public function store(Request $request)
   $student->year_id = $request->year_name;
   $student->save();
   $student->courses()->attach($this->attachCourses($request));
+
+  SecretIds::where('id', $request->student_id)->first()->update(['student_id' => $student->id]);
 
   Student_profile::create(['student_id' => $student->id]);
 

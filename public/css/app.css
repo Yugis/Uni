@@ -7690,8 +7690,10 @@ button.close {
 
 html, body {
   height: 100%;
-  background: -webkit-linear-gradient(bottom, #ff0066 0%, #ff99ff 100%);
-  background: linear-gradient(to top, #ff0066 0%, #ff99ff 100%);
+  background: -webkit-linear-gradient(bottom, #e53935, #e35d5b);
+  background: linear-gradient(to top, #e53935, #e35d5b);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #app {
@@ -7859,8 +7861,8 @@ html, body {
 }
 
 .templinks {
-  color: #ff0060;
-  border: 1px solid #ff0060;
+  color: #800000;
+  border: 1px solid #800000;
   text-decoration: none;
   padding: 10px;
   display: ruby-text;
@@ -7870,9 +7872,11 @@ html, body {
 
 .templinks:hover, .templinks:focus {
   color: white;
-  background-color: #ff0060;
-  border: 1px solid #ff0060;
+  background-color: #800000;
+  border: 1px solid #800000;
   text-decoration: none;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 .container-index {
@@ -7897,7 +7901,7 @@ html, body {
 }
 
 .course-index-heading h2, h3 {
-  color: #ff0066;
+  color: #800000;
 }
 
 .students-index-flex {
@@ -7911,7 +7915,8 @@ html, body {
 }
 
 .table {
-  color: #ff5050;
+  color: coral;
+  background-color: #800000;
 }
 
 thead {
@@ -7934,6 +7939,7 @@ th {
   -webkit-box-pack: center;
   justify-content: center;
   min-width: 25%;
+  color: coral;
 }
 
 td {
@@ -7944,12 +7950,45 @@ td {
   justify-content: center;
   -webkit-box-align: center;
   align-items: center;
-  min-width: 25%;
   -webkit-box-flex: 1;
   flex: 1;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   flex-direction: column;
+  background-color: whitesmoke;
+  margin: 5px;
+  border-radius: 50px;
+}
+
+td a {
+  text-decoration: none;
+  color: brown;
+}
+
+td a:hover {
+  text-decoration: none;
+}
+
+td:hover {
+  background-color: brown;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+td:hover a {
+  color: brown;
+  border-color: brown;
+  border-radius: 50px;
+  background-color: whitesmoke;
+  padding: 0px 10px 0px 10px;
+}
+
+td:hover a:hover {
+  cursor: pointer;
+  color: whitesmoke;
+  background-color: #990000;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 tbody {
@@ -7974,7 +8013,7 @@ tbody {
 }
 
 .panel-danger {
-  border-color: #ff157b;
+  border-color: #800000;
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: vertical;
@@ -7984,12 +8023,12 @@ tbody {
 
 .panel-danger > .panel-heading {
   color: #ffff66;
-  background-color: #ff0066;
-  border-color: #ff157b;
+  background-color: #800000;
+  border-color: #800000;
 }
 
 .navbar-default {
-  background-color: #FF5050;
+  background-color: #990000;
   border-color: #d3e0e9;
 }
 
@@ -8021,6 +8060,20 @@ tbody {
   background-color: transparent;
 }
 
+ul .dropdown-menu {
+  background-color: #6f0000;
+  padding: 20px;
+}
+
+ul .dropdown-menu > li > a {
+  color: whitesmoke;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: inherit;
+  color: whitesmoke;
+}
+
 .Pmodal {
   overflow: hidden;
   position: fixed;
@@ -8031,6 +8084,10 @@ tbody {
   z-index: 1050;
   -webkit-overflow-scrolling: touch;
   outline: 0;
+}
+
+.navbar {
+  border: none;
 }
 
 /*# sourceMappingURL=app.css.map */

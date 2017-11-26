@@ -15,7 +15,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background: linear-gradient(to top, #33ccff 0%, #ff99cc 100%);
+                /*background: linear-gradient(to top, #33ccff 0%, #ff99cc 100%);*/
+                background: linear-gradient(to bottom, #200122, #6f0000);
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;

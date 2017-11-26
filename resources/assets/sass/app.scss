@@ -9,7 +9,10 @@
 
 html, body {
   height: 100%;
-  background: linear-gradient(to top, #ff0066 0%, #ff99ff 100%);
+  // background: linear-gradient(to bottom, #200122, #6f0000);
+  background: linear-gradient(to top, #e53935, #e35d5b);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #app {
@@ -134,8 +137,8 @@ html, body {
 }
 
 .templinks {
-  color: #ff0060;
-  border: 1px solid #ff0060;
+  color: $primary-color;
+  border: 1px solid $panel-danger-border-color;
   text-decoration: none;
   padding: 10px;
   display: ruby-text;
@@ -145,9 +148,10 @@ html, body {
 
 .templinks:hover, .templinks:focus {
   color: white;
-  background-color: #ff0060;
-  border: 1px solid #ff0060;
+  background-color: $primary-color;
+  border: 1px solid $panel-danger-border-color;
   text-decoration: none;
+  transition: all 0.5s;
 }
 
 .container-index {
@@ -166,7 +170,7 @@ html, body {
 }
 
 .course-index-heading h2, h3 {
-  color: #ff0066;
+  color: $primary-color;
 }
 
 .students-index-flex {
@@ -179,7 +183,9 @@ html, body {
 }
 
 .table {
-  color: #ff5050;
+  color: $table-color;
+  // color: brown;
+  background-color: $primary-color;
 }
 
 thead {
@@ -197,6 +203,7 @@ th {
   flex: 1;
   justify-content: center;
   min-width: 25%;
+  color: coral;
 }
 
 td {
@@ -204,9 +211,35 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 25%;
   flex: 1;
   flex-direction: column;
+  background-color: whitesmoke;
+  margin: 5px;
+  border-radius: 50px;
+  a {
+    text-decoration: none;
+    color: brown;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  &:hover {
+    background-color: brown;
+    transition: all 0.5s;
+    a {
+      color: brown;
+      border-color: brown;
+      border-radius: 50px;
+      background-color: whitesmoke;
+      padding: 0px 10px 0px 10px;
+      &:hover {
+        cursor: pointer;
+        color: whitesmoke;
+        background-color: $navbar-default;
+        transition: all 0.5s;
+      }
+    }
+  }
 }
 
 tbody {
@@ -228,20 +261,20 @@ tbody {
 
 .panel-danger {
   // border-color: #ffccff;
-  border-color: #ff157b;
+  border-color: $panel-danger-border-color;
   display: flex;
   flex-direction: column;
 }
 
 .panel-danger > .panel-heading {
   color: #ffff66;
-  background-color: #ff0066;
-  border-color: #ff157b;
+  background-color: $primary-color;
+  border-color: $panel-danger-border-color;
   // border-color: #ffccff;
 }
 
 .navbar-default {
-  background-color: #FF5050;
+  background-color: $navbar-default;
   border-color: #d3e0e9;
 }
 
@@ -273,6 +306,23 @@ tbody {
   background-color: transparent;
 }
 
+ul {
+  .dropdown-menu {
+    background-color: #6f0000;
+    padding: 20px;
+    > li {
+      > a {
+        color: whitesmoke;
+      }
+    }
+  }
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: inherit;
+  color: whitesmoke;
+}
+
 .Pmodal {
   overflow: hidden;
   position: fixed;
@@ -283,4 +333,8 @@ tbody {
   z-index: 1050;
   -webkit-overflow-scrolling: touch;
   outline: 0;
+}
+
+.navbar {
+  border: none;
 }

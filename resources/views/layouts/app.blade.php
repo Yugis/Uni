@@ -140,7 +140,7 @@
     		@endif
 
         @if ($flash = session('fail'))
-    			<div id="flash-success" class="alert alert-danger animated fadeInUp" role="alert">
+    			<div id="flash-fail" class="alert alert-danger animated lightSpeedIn" role="alert">
     				{{ $flash }}
     			</div>
     		@endif

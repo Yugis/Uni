@@ -32,7 +32,7 @@
                 <a target="_blank" href="{{$instructor->profile->instagram_link}}"><img src="{{ Storage::url('public/defaults/icons/instagram.png')}}" width="60px" height="60px"></a>
               @endif
             </center>
-          </div>
+           </div>
         </div>
 
         <div class="panel panel-danger">
@@ -89,7 +89,7 @@
 
 
       <div class="col-lg-2">
-        <div class="panel panel-primary">
+        <div class="panel panel-danger">
           <div class="panel-heading">
             Other Info
           </div>

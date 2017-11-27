@@ -14,11 +14,10 @@ class CreateSecretIdsTable extends Migration
   public function up()
   {
     Schema::create('secret_ids', function (Blueprint $table) {
-      $table->bigInteger('id')->unsigned()->index()->unique();
-      $table->string('tag');
-      $table->integer('instructor_id')->nullable();
-      $table->foreign('instructor_id')->references('id')->on('instructors');
-      $table->integer('student_id')->nullable();
+      $table->increments('id');
+      $table->bigInteger('secret_id')->unsigned()->index()->unique();
+      $table->integer('owner_id')->nullable();
+      $table->string('owner_type');
     });
   }
 

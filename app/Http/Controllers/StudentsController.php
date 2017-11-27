@@ -76,13 +76,10 @@ public function create()
 
 public function store(Request $request)
 {
-  $first_student_id = \App\SecretIds::where(['tag' => 'Student'])->first();
-  $last_student_id = \App\SecretIds::where(['tag' => 'Student'])->get()->last();
-
   $this->validate($request, [
     'first_name' => 'required|max:30',
     'last_name' => 'required|max:30',
-    'student_id' => 'required|exists:secret_ids,id',
+    'student_id' => 'required|exists:secret_ids,secret_id',
     'gender' => 'required|bool',
     'email' => 'required|unique:students,email|email',
     'faculty_name' => 'required',
@@ -91,10 +88,10 @@ public function store(Request $request)
     'password' => 'required|min:4|confirmed'
   ]);
 
-  $valid_ids = SecretIds::where(['tag' => 'Student', 'student_id' => null])->get()->pluck('id')->toArray();
+  $valid_ids = SecretIds::where(['owner_type' => 'App\Student', 'owner_id' => null])->get()->pluck('id')->toArray();
 
   if(!in_array($request->student_id, $valid_ids)) {
-    \Session::flash('fail', 'Error, job ID is invalid!');
+    \Session::flash('fail', 'Error, student ID is invalid!');
     return redirect()->back()->withInput();
   }
 
@@ -122,11 +119,11 @@ public function store(Request $request)
   $student->save();
   $student->courses()->attach($this->attachCourses($request));
 
-  SecretIds::where('id', $request->student_id)->first()->update(['student_id' => $student->id]);
+  SecretIds::where('secret_id', $request->student_id)->first()->update(['owner_id' => $student->id]);
 
   Student_profile::create(['student_id' => $student->id]);
 
-  \Auth::login($student);
+  Auth::login($student);
 
   return redirect('/home');
 }

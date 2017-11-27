@@ -12,14 +12,14 @@ class SecretIdsTableSeeder extends Seeder
   public function run()
   {
     for ($x = 0; $x <= 100; $x++) {
-      $secret = new \App\SecretIds();
-      $secret->id = $x;
+      $dem = new \App\SecretIds();
+      $dem->secret_id = $x;
       if($x < 50) {
-        $secret->tag = 'Instructor';
+        $dem->owner_type = 'App\Instructor';
       } else {
-        $secret->tag = 'Student';
+        $dem->owner_type = 'App\Student';
       }
-      $secret->save();
+      $dem->save();
     }
   }
 }

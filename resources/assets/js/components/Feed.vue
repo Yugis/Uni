@@ -15,14 +15,6 @@
             <hr>
           </div>
 
-          <!-- <div v-if="!loading">
-            Posts will be here
-          </div> -->
-
-          <!-- <p v-if="loading" style="text-align: center;">
-            Loading...
-          </p> -->
-
           <center><div v-if="loading" class="spinner"></div></center>
 
       </div>
@@ -34,7 +26,6 @@
 export default {
   data: function() {
     return {
-      // posts: [],
       loading: true
     }
   },

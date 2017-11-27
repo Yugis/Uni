@@ -42,6 +42,6 @@ class Student extends Authenticatable
 
   public function secret_id()
   {
-    return $this->hasOne('App\SecretIds');
+    return $this->morphMany('App\SecretIds', 'owner');
   }
 }

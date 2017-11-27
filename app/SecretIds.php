@@ -6,17 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class SecretIds extends Model
 {
-  protected $fillable = ['id', 'instructor_id', 'student_id'];
+  protected $guarded = [];
 
   public $timestamps = false;
 
-  public function student()
+  public function owner()
   {
-    return $this->belongsTo('App\Student');
-  }
-
-  public function instructor()
-  {
-    return $this->belongsTo('App\Instructor');
+    return $this->morphTo();
   }
 }

@@ -7728,9 +7728,16 @@ html, body {
 }
 
 #flash-success {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+#flash-fail {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
   z-index: 10;
 }
 

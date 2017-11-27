@@ -39,13 +39,11 @@ class InstructorsController extends Controller
 
   public function store(Request $request)
   {
-    $first_job_id = \App\SecretIds::where(['tag' => 'Instructor'])->first();
-    $last_job_id = \App\SecretIds::where(['tag' => 'Instructor'])->get()->last();
     $this->validate($request, [
       'first_name' => 'required|max:30',
       'last_name' => 'required|max:30',
       'job_title' => 'required',
-      'job_id' => 'required|exists:secret_ids,id',
+      'job_id' => 'required|exists:secret_ids,secret_id',
       'gender' => 'required|bool',
       'email' => 'required|unique:instructors,email|email',
       'faculty_name' => 'required',
@@ -54,7 +52,7 @@ class InstructorsController extends Controller
       'password' => 'required|min:4|confirmed'
     ]);
 
-    $valid_ids = SecretIds::where(['tag' => 'Instructor', 'instructor_id' => null])->get()->pluck('id')->toArray();
+    $valid_ids = SecretIds::where(['owner_type' => 'App\Instructor', 'owner_id' => null])->get()->pluck('id')->toArray();
 
     if(!in_array($request->job_id, $valid_ids)) {
       \Session::flash('fail', 'Error, job ID is invalid!');
@@ -85,7 +83,7 @@ class InstructorsController extends Controller
     $instructor->faculties()->attach($request->faculty_name);
     $instructor->courses()->attach($request->course_name);
 
-    SecretIds::where('id', $request->job_id)->first()->update(['instructor_id' => $instructor->id]);
+    SecretIds::where('secret_id', $request->job_id)->first()->update(['owner_id' => $instructor->id]);
 
     Instructor_profile::create(['instructor_id' => $instructor->id]);
 

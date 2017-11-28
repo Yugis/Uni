@@ -7,7 +7,7 @@
     <div class="container-index">
     	<div class="course-index-heading">
       <h1> {{ $course->name }} </h1>
-      {{-- <a href="{{ route('quiz.create') }}" class="templinks"></a> --}}
+      <a href="{{ route('quiz.create', $course->slug) }}" class="templinks">Create A Quiz</a>
     </div>
         <div class="students-index-flex">
           <table class="table">

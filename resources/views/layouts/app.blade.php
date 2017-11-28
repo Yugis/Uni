@@ -88,7 +88,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding-left:10px">
-                                <img src="{{ Storage::url(Auth::user()->avatar)}}" width="26px" height="26px" style="border-radius: 50px">
+                                <img src="{{ Storage::url(Auth::user()->avatar)}}" width="26px" height="26px" style="border-radius: 50px; background-color: ghostwhite;">
                                     {{ Auth::user()->first_name }} <span class="caret"></span>
                                 </a>
 

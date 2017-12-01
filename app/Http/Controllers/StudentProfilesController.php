@@ -37,21 +37,19 @@ class StudentProfilesController extends Controller
     $user = Auth::user();
 
     if($request->hasFile('avatar')) {
-      if(Auth::user()->avatar !== 'public/defaults/avatars/male.png' && Auth::user()->avatar !== 'public/defaults/avatars/female.png') {
-        $lastavatar = Auth::user()->avatar;
+      if($user->avatar !== 'public/defaults/avatars/male.png' && $user->avatar !== 'public/defaults/avatars/female.png') {
+        $lastavatar = $user->avatar;
         Storage::delete($lastavatar);
 
-        Auth::user()->update([
+        $user->update([
           'avatar' => $request->avatar->store('public/uploads/avatars')
         ]);
-        // return ['status' => 'success'];
-        return redirect(route('student.profile', ['id' => Auth::user()->id, 'slug' => Auth::user()->slug ]));
+        return redirect(route('student.profile', ['id' => $user->id, 'slug' => $user->slug ]));
       } else {
-        Auth::user()->update([
+        $user->update([
           'avatar' => $request->avatar->store('public/uploads/avatars')
         ]);
-        return redirect(route('student.profile', ['id' => Auth::user()->id, 'slug' => Auth::user()->slug ]));
-        // return ['status' => 'success'];
+        return redirect(route('student.profile', ['id' => $user->id, 'slug' => $user->slug ]));
       }
     }
     $this->validate($request, [
@@ -61,39 +59,39 @@ class StudentProfilesController extends Controller
       'instagram_link' => 'max:100|min:15|string|unique:student_profiles,instagram_link,'.$user->id
     ]);
 
-    if($request->about !== Auth::user()->profile->about) {
-      Auth::user()->profile->update([
+    if($request->about !== $user->profile->about) {
+      $user->profile->update([
         'about' => $request->about
       ]);
     }
 
-    if($request->location !== Auth::user()->profile->location) {
-      Auth::user()->profile->update([
+    if($request->location !== $user->profile->location) {
+      $user->profile->update([
         'location' => $request->location
       ]);
     }
 
-    if($request->facebook_link !== Auth::user()->profile->facebook_link) {
-      Auth::user()->profile->update([
+    if($request->facebook_link !== $user->profile->facebook_link) {
+      $user->profile->update([
         'facebook_link' => $request->facebook_link
       ]);
     }
 
-    if($request->twitter_link !== Auth::user()->profile->twitter_link) {
-      Auth::user()->profile->update([
+    if($request->twitter_link !== $user->profile->twitter_link) {
+      $user->profile->update([
         'twitter_link' => $request->twitter_link
       ]);
     }
 
 
-    if($request->instagram_link !== Auth::user()->profile->instagram_link) {
-      Auth::user()->profile->update([
+    if($request->instagram_link !== $user->profile->instagram_link) {
+      $user->profile->update([
         'instagram_link' => $request->instagram_link
       ]);
     }
 
     $request->session()->flash('success', 'Your profile was updated succesfully!');
-    return redirect(route('student.profile', ['id' => Auth::user()->id, 'slug' => Auth::user()->slug ]));
+    return redirect(route('student.profile', ['id' => $user->id, 'slug' => $user->slug ]));
   }
 
 }

@@ -63,9 +63,9 @@
             @endif
             @if(Auth::guard('web')->check())
               @if (Auth::user()->id == $student->id)
-                {{-- <a href="{{ route('student.profile.edit', ['id' => $student->id, 'slug' => $student->slug]) }}" id="statusButton" class="btn btn-success btn-sm">Edit</a> --}}
-                <a href="#" @click="showModal = true" id="statusButton" class="btn btn-success btn-sm">Edit</a>
-                <edit-profile-modal :id="{{Auth::user()->id}}" :slug="'{{Auth::user()->slug}}'" :src="'{{Storage::url($student->avatar)}}'" @close="showModal = false" v-if="showModal"></edit-profile-modal>
+                <a href="{{ route('student.profile.edit', ['id' => $student->id, 'slug' => $student->slug]) }}" id="statusButton" class="btn btn-success btn-sm">Edit</a>
+                {{-- <a href="#" @click="showModal = true" id="statusButton" class="btn btn-success btn-sm">Edit</a> --}}
+                {{-- <edit-profile-modal :id="{{Auth::user()->id}}" :slug="'{{Auth::user()->slug}}'" :src="'{{Storage::url($student->avatar)}}'" @close="showModal = false" v-if="showModal"></edit-profile-modal> --}}
               @endif
             @endif
             {{-- <p>{{}}</p>

@@ -15,6 +15,8 @@ class Student extends Authenticatable
     'password', 'remember_token',
   ];
 
+  public $with = ['secret_id'];
+
   public function faculty()
   {
     return $this->belongsTo('App\Faculty');

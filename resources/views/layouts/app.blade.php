@@ -72,8 +72,8 @@
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Login <span class="caret"></span></a>
 
                               <ul class="dropdown-menu" role="menu">
-                              <li><a href="{{ url('/login') }}">As a student</a></li>
-                                <li><a href="{{ route('instructor.login') }}">As an instructor</a></li>
+                              <li><a href="{{ url('/login') }}">As a Student</a></li>
+                                <li><a href="{{ route('instructor.login') }}">As an Instructor</a></li>
                               </ul>
                             </li>
 
@@ -81,8 +81,8 @@
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Register<span class="caret"></span></a>
 
                               <ul class="dropdown-menu" role="menu">
-                              <li><a href="{{ url('/register') }}">As a student</a></li>
-                                <li><a href="{{ route('instructor.submit.register') }}">As an instructor</a></li>
+                              <li><a href="{{ url('/register') }}">As a Student</a></li>
+                                <li><a href="{{ route('instructor.submit.register') }}">As an Instructor</a></li>
                               </ul>
                             </li>
                         @else
@@ -121,13 +121,13 @@
                     <ul class="nav nav-pills navbar-nav navbar-right">
                     <!-- <li role="presentation" class="{{Request::is('create.course') ? "active" : "" }}"><a href="/create.course">Create Course</a></li>
                     <li role="presentation" class="{{Request::is('create.faculty') ? "active" : "" }}"><a href="/create.faculty">Create Faculty</a></li> -->
-                    @if(Auth::check())
+                    <!-- @if(Auth::check())
                       @if(Auth::guard('web')->check())
                         <unread></unread>
                       @endif
 
                       <li role="presentation" class="{{Request::is('home') ? "active" : "" }}"><a href="/home">Home</a></li>
-                    @endif
+                    @endif -->
                     </ul>
                 </div>
             </div>

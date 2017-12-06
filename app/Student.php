@@ -7,43 +7,48 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Student extends Authenticatable
 {
-  use Notifiable;
+    use Notifiable;
 
-  protected $fillable = ['avatar'];
+    protected $fillable = ['avatar'];
 
-  protected $hidden = [
-    'password', 'remember_token',
-  ];
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
-  public $with = ['secret_id'];
+    public $with = ['secret_id'];
 
-  public function faculty()
-  {
-    return $this->belongsTo('App\Faculty');
-  }
+    public function faculty()
+    {
+        return $this->belongsTo(Faculty::class);
+    }
 
-  public function courses()
-  {
-    return $this->belongsToMany('App\Course')->withPivot('completed', 'finals', 'grades', 'attendance')->withTimestamps();
-  }
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class)->withPivot('completed', 'finals', 'grades', 'attendance')->withTimestamps();
+    }
 
-  public function profile()
-  {
-    return $this->hasOne('App\Student_profile');
-  }
+    public function profile()
+    {
+        return $this->hasOne(Student_profile::class);
+    }
 
-  public function year()
-  {
-    return $this->belongsTo('App\Year');
-  }
+    public function year()
+    {
+        return $this->belongsTo(Year::class);
+    }
 
-  public function isFollowing()
-  {
-    return $this->belongsToMany('App\Instructor', 'instructor_students')->withTimestamps();
-  }
+    public function isFollowing()
+    {
+        return $this->belongsToMany(Instructor::class, 'instructor_students')->withTimestamps();
+    }
 
-  public function secret_id()
-  {
-    return $this->morphMany('App\SecretIds', 'owner');
-  }
+    public function secret_id()
+    {
+        return $this->morphMany(SecretIds::class, 'owner');
+    }
+
+    public function quizzes()
+    {
+      return $this->belongsToMany(Quiz::class)->withPivot('completed')->withTimestamps();
+    }
 }

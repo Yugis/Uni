@@ -3,7 +3,7 @@
 @section('content')
   <div class="create-flex">
     <div class="col-md-6">
-      <form method="POST">
+      <form method="POST" action="{{ route('quiz.store', $course->slug)}}">
         {{ csrf_field() }}
         <div class="panel panel-danger">
           <div class="panel-heading">
@@ -21,12 +21,12 @@
                   <input type="checkbox" name="id[]" value="{{ $question->id }}">
                 </div>
                 <hr>
-                <input type="submit" class="btn btn-success" value="Create Quiz">
               @empty
               </ul>
               There are no questions yet, <a href="{{ route('questions.create')}}">create some?</a>
             @endforelse
 
+            <input type="submit" class="btn btn-success" value="Create Quiz">
           </div>
         </form>
       </div>

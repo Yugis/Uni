@@ -18,7 +18,6 @@ class QuestionsController extends Controller
 
   public function store(Request $request)
   {
-    // dd($request->correct_answer);
     $this->validate($request, [
       'questionTitle' => 'required|unique:questions,title',
       'option_1' => 'required',
@@ -29,9 +28,9 @@ class QuestionsController extends Controller
       'course_id' => 'required'
     ]);
 
-    // dd('something');
-
     $correct = $request->correct_answer;
+
+    dd($request->correct_answer)
     $q = new Question;
     $q->title = $request->questionTitle;
     $q->option_1 = $request->option_1;

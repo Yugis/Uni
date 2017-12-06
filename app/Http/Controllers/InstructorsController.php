@@ -13,45 +13,45 @@ use Illuminate\Validation\Rule;
 class InstructorsController extends Controller
 {
 
-  use RegistersInstructors;
+    use RegistersInstructors;
 
-  public function __construct()
-  {
-    $this->middleware(['guest:instructor,web'], ['only' => 'create']);
-  }
+    public function __construct()
+    {
+        $this->middleware(['guest:instructor,web'], ['only' => 'create']);
+    }
 
-  public function all()
-  {
-    $instructors = Instructor::paginate(10);
+    public function all()
+    {
+        $instructors = Instructor::paginate(10);
 
-    return view('instructors.all', compact('instructors'));
-  }
+        return view('instructors.all', compact('instructors'));
+    }
 
-  public function index()
-  {
-    return view('instructor-dashboard');
-  }
+    public function index()
+    {
+        return view('instructor-dashboard');
+    }
 
-  public function create()
-  {
-    $faculties = Faculty::pluck('name', 'id');
-    $courses = Course::orderBy('name', 'asc')->pluck('name', 'id');
-    return view('auth.instructor-register', compact('faculties', 'courses'));
-  }
+    public function create()
+    {
+        $faculties = Faculty::pluck('name', 'id');
+        $courses = Course::orderBy('name', 'asc')->pluck('name', 'id');
+        return view('auth.instructor-register', compact('faculties', 'courses'));
+    }
 
-  public function store(Request $request)
-  {
-    $this->validateInstructor($request);
+    public function store(Request $request)
+    {
+        $this->validateInstructor($request);
 
-    $this->recordInstructor($request);
+        $this->recordInstructor($request);
 
-    return redirect('/instructor');
-  }
+        return redirect('/instructor');
+    }
 
-  public function myCourses()
-  {
-    $courses = Auth::user()->courses;
+    public function myCourses()
+    {
+        $courses = Auth::user()->courses;
 
-    return view('courses.schedule', compact('courses'));
-  }
+        return view('courses.schedule', compact('courses'));
+    }
 }

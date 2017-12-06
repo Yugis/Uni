@@ -4,37 +4,38 @@ namespace App\Http\Controllers;
 
 use App\Quiz;
 use App\Course;
+use App\Faculty;
 use App\Question;
 use Illuminate\Http\Request;
 
 class QuizzesController extends Controller
 {
-  public function create($slug)
-  {
-    $course = Course::where(['slug' => $slug])->first();
+    public function create($slug)
+    {
+        $course = Course::whereSlug($slug)->first();
 
-    $questions = Question::where(['course_id' => $course->id])->latest()->get();
+        $questions = Question::where(['course_id' => $course->id])->latest()->get();
 
-    return view('quizzes.create', compact('questions'));
-  }
-
-  public function store(Request $request)
-  {
-    // dd($request->id);
-    // $collection = collect($request->except('_token'));
-    // $collection->each(function ($item, $key) {
-    //
-    // });
-    // dd($collection);
-
-    // dd(Quiz::with('questions')->first());
-    $quiz = Quiz::create();
-    foreach($request->id as $key => $value) {
-      $quiz->questions()->syncWithoutDetaching([$value]);
+        return view('quizzes.create', compact('questions', 'course'));
     }
 
-    \Session::flash('success', 'A quiz was created!');
+    public function store(Request $request, $slug)
+    {
+        $course = Course::whereSlug($slug)->first();
+        $quiz = new Quiz();
+        $quiz_name = $quiz->determineName($slug);
 
-    return redirect('/instructor');
-  }
+        $quiz->quiz_name = $quiz_name;
+        $quiz->course_id = $course->id;
+        $quiz->faculty_id = Faculty::where('name', $course->faculty->name)->first()->id;
+        $quiz->save();
+
+        foreach($request->id as $key => $value) {
+            $quiz->questions()->syncWithoutDetaching([$value]);
+        }
+
+        \Session::flash('success', 'A quiz was created!');
+
+        return redirect('/instructor');
+    }
 }

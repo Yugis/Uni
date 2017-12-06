@@ -20,32 +20,32 @@ class Instructor extends Authenticatable
 
   public function faculties()
   {
-    return $this->belongsToMany('App\Faculty');
+    return $this->belongsToMany(Faculty::class);
   }
 
   public function courses()
   {
-    return $this->belongsToMany('App\Course');
+    return $this->belongsToMany(Course::class);
   }
 
   public function profile()
   {
-    return $this->hasOne('App\Instructor_profile');
+    return $this->hasOne(Instructor_profile::class);
   }
 
   public function posts()
   {
-    return $this->hasMany('App\Post');
+    return $this->hasMany(Post::class);
   }
 
   public function followers()
   {
-    return $this->belongsToMany('App\Student', 'instructor_students')->withTimestamps();
+    return $this->belongsToMany(Student::class, 'instructor_students')->withTimestamps();
   }
 
   public function secret_id()
   {
-    return $this->morphMany('App\SecretIds', 'owner');
+    return $this->morphMany(SecretIds::class, 'owner');
   }
 
   public function coursesPerFaculty($id)

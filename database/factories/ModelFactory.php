@@ -24,13 +24,16 @@
 // });
 
 $factory->define(App\Question::class, function (Faker\Generator $faker) {
+
+    $answer = $faker->word;
+
     return [
-        $correct = 'title' => $faker->sentence($nbWords = 6),
-        'option_1' => $faker->word,
+        'title' => $faker->sentence($nbWords = 6),
+        'option_1' => $answer,
         'option_2' => $faker->word,
         'option_3' => $faker->word,
         'option_4' => $faker->word,
-        'correct_answer' => $correct,
-        'course_id' => 2,
+        'correct_answer' => $answer,
+        'course_id' => 1,
     ];
 });

@@ -21,6 +21,11 @@ class QuizzesController extends Controller
 
     public function store(Request $request, $slug)
     {
+        if (! $request->id) {
+            \Session::flash('fail', 'You must select at least one question!');
+            return back();
+        }
+
         $course = Course::whereSlug($slug)->first();
         $quiz = new Quiz();
         $quiz_name = $quiz->determineName($slug);

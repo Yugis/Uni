@@ -33,12 +33,7 @@ trait RegistersInstructors {
 
   public function recordInstructor($request)
   {
-    if($request->gender)
-    {
-      $avatar = 'public/defaults/avatars/male.png';
-    } else {
-      $avatar = 'public/defaults/avatars/female.png';
-    }
+    $avatar = $request->gender ? 'public/defaults/avatars/male.png' : 'public/defaults/avatars/female.png';
 
     $instructor = new Instructor();
     $instructor->job_title = $request->job_title;

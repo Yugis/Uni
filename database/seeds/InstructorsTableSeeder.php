@@ -28,7 +28,7 @@ class InstructorsTableSeeder extends Seeder
         $instructor->office_location = 'A26';
         $instructor->save();
         $instructor->faculties()->attach(1);
-        $instructor->courses()->attach(1);
+        $instructor->courses()->attach([2, 3]);
         \App\SecretIds::where('secret_id', 33)->first()->update(['owner_id' => $instructor->id]);
         $instructor->profile()->create(['instructor_id' => $instructor->id]);
 

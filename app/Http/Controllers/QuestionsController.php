@@ -30,7 +30,6 @@ class QuestionsController extends Controller
 
     $correct = $request->correct_answer;
 
-    dd($request->correct_answer)
     $q = new Question;
     $q->title = $request->questionTitle;
     $q->option_1 = $request->option_1;

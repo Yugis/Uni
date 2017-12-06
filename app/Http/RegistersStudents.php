@@ -33,14 +33,7 @@ trait RegistersStudents {
 
   public function recordStudent($request)
   {
-    if($request->gender)
-    {
-      $avatar = 'public/defaults/avatars/male.png';
-    }
-    else
-    {
-      $avatar = 'public/defaults/avatars/female.png';
-    }
+    $avatar = $request->gender ? 'public/defaults/avatars/male.png' : 'public/defaults/avatars/female.png';
 
     $student = new Student();
     $student->first_name = ucfirst($request->first_name);

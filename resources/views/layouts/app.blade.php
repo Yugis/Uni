@@ -99,6 +99,11 @@
                                     <li><a href="{{ route('questions.create')}}">Create Questions</a></li>
                                     @else
                                     <li><a href="{{ route('student.profile', ['id' => Auth::user()->id, 'slug' => Auth::user()->slug ]) }}">My profile</a></li>
+                                         @if($quizzes->isNotEmpty())
+                                             @foreach($quizzes as $quiz)
+                                                <li><a href="{{ route('take.quiz', ['course' => $quiz->course->slug, 'quiz_name' => $quiz->quiz_name])}}">Take {{$quiz->course->name}}  Quiz !!</a></li>
+                                            @endforeach
+                                        @endif
                                     @endif
                                     <li role="separator" class="divider"></li>
                                     <li>
@@ -147,12 +152,12 @@
 
         @yield('content')
 
-        @if(Auth::guard('web')->check())
+        <!-- @if(Auth::guard('web')->check())
         <notification :id="{{ Auth::user()->id }}" ></notification>
         <audio id="notification_audio">
           <source src="{{ asset('audio/audio.mp3') }}">
         </audio>
-        @endif
+        @endif -->
 
 	</div>
     <!-- Scripts -->

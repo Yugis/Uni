@@ -28,6 +28,9 @@ Route::group(['prefix' => 'instructor'], function () {
   Route::post('/{id}/{slug?}/edit', 'InstructorProfilesController@update')->name('instructor.profile.store');
 });
 
+//Get/Post for taking quizzes
+Route::get('/{slug}/{quiz_name}', 'ExaminationsController@show')->name('take.quiz')->middleware('auth:web');
+
 //Loading Views To View Courses, Studnets And Professors;
 Route::get('students', 'StudentsController@index')->middleware(['auth:web,instructor']);
 
@@ -53,10 +56,6 @@ Route::post('mark_as_read', function() {
 });
 
 Route::get('get_related_posts/{id}', 'PostsController@feed');
-
-// Create A New Quiz.
-// Route::get('/quiz');
-
 
 
 // Temporary Routes To Create Courses And Faculties.

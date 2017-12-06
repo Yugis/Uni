@@ -18,6 +18,7 @@ class CreateQuizStudentTable extends Migration
             $table->integer('student_id');
             $table->integer('quiz_id');
             $table->boolean('completed')->default(false);
+            $table->unsignedInteger('score')->default(0);
             $table->timestamps();
         });
     }

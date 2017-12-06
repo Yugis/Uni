@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
+use Illuminate\Support\Facades\Lang;
 
 class InstructorsLoginController extends Controller
 {
@@ -30,6 +31,10 @@ class InstructorsLoginController extends Controller
       return redirect()->intended(route('instructor.dashboard'));
     }
 
-    return redirect()->back()->withInput($request->only('email', 'remember'));
+    return redirect()->back()
+    ->withInput($request->only('email', 'remember'))
+    ->withErrors([
+        'email' => Lang::get('auth.failed'),
+    ]);
   }
 }

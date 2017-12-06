@@ -23,10 +23,10 @@ class StudentsTableSeeder extends Seeder
         $student->email = 'omar.tarek.18@e.com';
         $student->phone_number = 01153665774;
         $student->password = bcrypt('atensec');
-        $student->faculty_id = 1;
-        $student->year_id = 1;
+        $student->faculty_id = 2;
+        $student->year_id = 4;
         $student->save();
-        $student->courses()->attach(\App\Course::where(['faculty_id' => 1, 'year_id' => 1])->get());
+        $student->courses()->attach(\App\Course::where(['faculty_id' => 2, 'year_id' => 4])->get());
 
         \App\SecretIds::where('secret_id', 55)->first()->update(['owner_id' => $student->id]);
 

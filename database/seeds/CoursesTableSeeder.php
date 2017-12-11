@@ -26,5 +26,13 @@ class CoursesTableSeeder extends Seeder
       $faculty3 = \App\Faculty::where('name', 'Business')->first();
       $year3 = \App\Year::where('name', 'Fourth')->first();
       \App\Course::create(['name' => 'Auditing', 'slug' => 'auditing', 'faculty_id' => $faculty3->id, 'year_id' => $year3->id]);
+
+      $faculty4 = \App\Faculty::where('name', 'Computer Science')->first();
+      $year4 = \App\Year::where('name', 'Third')->first();
+      \App\Course::create(['name' => 'Networks', 'slug' => 'neworks', 'faculty_id' => $faculty4->id, 'year_id' => $year4->id]);
+
+      $faculty5 = \App\Faculty::where('name', 'Computer Science')->first();
+      $year5 = \App\Year::where('name', 'Fourth')->first();
+      \App\Course::create(['name' => 'Data Communications', 'slug' => 'data-communications', 'faculty_id' => $faculty5->id, 'year_id' => $year5->id]);
     }
 }

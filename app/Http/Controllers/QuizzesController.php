@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class QuizzesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:instructor');
+    }
     public function create($slug)
     {
         $course = Course::whereSlug($slug)->first();
@@ -38,6 +42,8 @@ class QuizzesController extends Controller
         foreach($request->id as $key => $value) {
             $quiz->questions()->syncWithoutDetaching([$value]);
         }
+
+        $quiz->syncStudents();
 
         \Session::flash('success', 'A quiz was created!');
 

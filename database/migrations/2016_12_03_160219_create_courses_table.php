@@ -26,6 +26,7 @@ class CreateCoursesTable extends Migration
       $table->timestamps();
       $table->integer('faculty_id')->unsigned();
       $table->integer('year_id')->unsigned();
+      $table->unique(['name', 'faculty_id']);
     });
   }
 

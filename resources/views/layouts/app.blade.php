@@ -101,7 +101,9 @@
                                     <li><a href="{{ route('student.profile', ['id' => Auth::user()->id, 'slug' => Auth::user()->slug ]) }}">My profile</a></li>
                                          @if($quizzes->isNotEmpty())
                                              @foreach($quizzes as $quiz)
-                                                <li><a href="{{ route('take.quiz', ['course' => $quiz->course->slug, 'quiz_name' => $quiz->quiz_name])}}">Take {{$quiz->course->name}}  Quiz !!</a></li>
+                                                 @can('view', $quiz)
+                                                    <li><a href="{{ route('take.quiz', ['course' => $quiz->course->slug, 'quiz_name' => $quiz->quiz_name])}}">Take {{$quiz->course->name}}  Quiz !!</a></li>
+                                                @endcan
                                             @endforeach
                                         @endif
                                     @endif

@@ -49,6 +49,6 @@ class Student extends Authenticatable
 
     public function quizzes()
     {
-      return $this->belongsToMany(Quiz::class)->withPivot('completed')->withTimestamps();
+      return $this->belongsToMany(Quiz::class)->withPivot('completed', 'score')->withTimestamps();
     }
 }

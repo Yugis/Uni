@@ -25,7 +25,16 @@ class Quiz extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Student::class)->withPivot('completed');
+        return $this->belongsToMany(Student::class)->withPivot('completed', 'score');
+    }
+
+    public function syncStudents()
+    {
+        $course = \App\Course::where(['id' => $this->course_id, 'faculty_id' => $this->faculty_id])->first();
+
+        foreach($course->students as $student) {
+            $this->students()->syncWithoutDetaching([$student->id]);
+        }
     }
 
     public function determineName($slug)
@@ -38,10 +47,11 @@ class Quiz extends Model
         return 'quiz-' . $lastQuiz;
     }
 
-    public static function getActiveQuiz($user)
+    public static function getActiveQuiz($user = null, $course_id = [])
     {
-        $user = \Auth::user();
+        $user = $user ?: \Auth::user();
+        $requiredCourseId = $course_id ?: $user->courses()->pluck('course_id')->toArray();
         return static::where(['faculty_id' => $user->faculty_id, 'active' => true])
-                    ->whereIn('course_id', $user->courses()->pluck('course_id')->toArray())->get();
+        ->whereIn('course_id', $requiredCourseId)->get();
     }
 }

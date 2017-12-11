@@ -28,8 +28,29 @@ class StudentsTableSeeder extends Seeder
         $student->save();
         $student->courses()->attach(\App\Course::where(['faculty_id' => 2, 'year_id' => 4])->get());
 
-        \App\SecretIds::where('secret_id', 55)->first()->update(['owner_id' => $student->id]);
+        \App\SecretIds::where(['secret_id' => 55, 'owner_id' => null])->first()->update(['owner_id' => $student->id]);
 
         $student->profile()->create(['student_id' => $student->id]);
+
+        $avatar2 = 'public/defaults/avatars/female.png';
+
+        $student2 = new \App\Student();
+        $student2->first_name = 'Angie';
+        $student2->last_name = 'Varona';
+        $student2->full_name = 'Angie Varona';
+        $student2->slug = 'Angie-Varona';
+        $student2->gender = 'female';
+        $student2->avatar = $avatar2;
+        $student2->email = 'angievarona@e.com';
+        $student2->phone_number = 01153665733;
+        $student2->password = bcrypt('atensec');
+        $student2->faculty_id = 2;
+        $student2->year_id = 3;
+        $student2->save();
+        $student2->courses()->attach(\App\Course::where(['faculty_id' => 2, 'year_id' => 3])->get());
+
+        \App\SecretIds::where(['secret_id' => 66, 'owner_id' => null])->first()->update(['owner_id' => $student2->id]);
+
+        $student2->profile()->create(['student_id' => $student2->id]);
     }
 }

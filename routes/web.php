@@ -12,6 +12,8 @@ Auth::routes();
 Route::get('register', 'StudentsController@create')->middleware('guest');
 Route::post('register', 'StudentsController@store');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login')->middleware(['guest:instructor,web']);
+
+
 //Instructors
 Route::group(['prefix' => 'instructor'], function () {
   Route::get('/login', 'Auth\InstructorsLoginController@showLoginForm')->name('instructor.login')->middleware(['guest:web,instructor']);
@@ -28,8 +30,6 @@ Route::group(['prefix' => 'instructor'], function () {
   Route::post('/{id}/{slug?}/edit', 'InstructorProfilesController@update')->name('instructor.profile.store');
 });
 
-//Get/Post for taking quizzes
-Route::get('/{slug}/{quiz_name}', 'ExaminationsController@show')->name('take.quiz')->middleware('auth:web');
 
 //Loading Views To View Courses, Studnets And Professors;
 Route::get('students', 'StudentsController@index')->middleware(['auth:web,instructor']);
@@ -40,6 +40,9 @@ Route::get('/courses/{slug}', 'CoursesController@show')->name('courses.show');
 
 Route::get('/MyCourses', 'CoursesController@myCourses')->name('student.mycourses');
 
+//Get/Post for taking quizzes
+Route::get('/{slug}/{quiz_name}', 'ExaminationsController@show')->name('take.quiz')->middleware('auth:web');
+Route::post('/{slug}/{quiz_name}', 'ExaminationsController@store')->name('exam.process')->middleware('auth:web');
 
 Route::get('student/{id}/{slug?}', 'StudentProfilesController@index')->name('student.profile');
 Route::get('/{id}/{slug?}/edit', 'StudentProfilesController@edit')->name('student.profile.edit');
@@ -66,7 +69,7 @@ Route::post('create.course', 'CoursesController@store');
 // Create Questions & Quizzes.
 Route::get('create.questions', 'QuestionsController@create')->middleware('auth:instructor')->name('questions.create');
 /* You need to edit questions.create for production, make it look like quiz.create by editing the dropdown menue to have all courses to choose from*/
-Route::post('create.questions', 'QuestionsController@store');
+Route::post('create.questions', 'QuestionsController@store')->middleware('auth:instructor');
 Route::get('/course/{slug}/create-quiz', 'QuizzesController@create')->name('quiz.create')->middleware('auth:instructor');
 Route::post('/course/{slug}/create-quiz', 'QuizzesController@store')->name('quiz.store')->middleware('auth:instructor');
 

@@ -77,6 +77,13 @@ class StudentsController extends Controller
     {
         $this->validateStudent($request);
 
+        $valid_ids = \App\SecretIds::where(['owner_type' => 'App\Student', 'owner_id' => null])->get()->pluck('secret_id')->toArray();
+
+        if (! in_array($request->student_id, $valid_ids)) {
+            \Session::flash('fail', 'Error, student ID is invalid!');
+            return redirect()->back()->withInput();
+        }
+
         $this->recordStudent($request);
 
         return redirect('/home');

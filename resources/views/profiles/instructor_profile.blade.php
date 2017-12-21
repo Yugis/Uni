@@ -18,20 +18,6 @@
               <follow-status :instructor_id="{{$instructor->id}}"></follow-status>
               <br>
             @endif
-            <center>
-              @if($instructor->profile->facebook_link)
-                <hr>
-                <a target="_blank" href="{{ $instructor->profile->facebook_link }}"><img src="{{ Storage::url('public/defaults/icons/facebook.png')}}" width="60px" height="60px"></a>
-              @endif
-
-              @if($instructor->profile->twitter_link)
-                <a target="_blank" href="{{$instructor->profile->twitter_link}}"><img src="{{ Storage::url('public/defaults/icons/twitter.png')}}" width="60px" height="60px"></a>
-              @endif
-
-              @if($instructor->profile->instagram_link)
-                <a target="_blank" href="{{$instructor->profile->instagram_link}}"><img src="{{ Storage::url('public/defaults/icons/instagram.png')}}" width="60px" height="60px"></a>
-              @endif
-            </center>
            </div>
         </div>
 

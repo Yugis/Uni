@@ -40,16 +40,16 @@ class ExaminationsController extends Controller
     * @param  \Illuminate\Http\Request  $request
     * @return \Illuminate\Http\Response
     */
-    public function store(Request $request, $slug)
+    public function store(Request $request, $slug, $quiz_name)
     {
         $course_id = Course::whereSlug($slug)->where('faculty_id', Auth::user()->faculty_id)->first()->id;
-        $quiz = Quiz::getActiveQuiz('', [$course_id])->first()->load('questions');
+        $quiz = Quiz::getActiveQuiz([$course_id])->where('quiz_name', $quiz_name)->first()->load('questions');
 
         $data = [];
 
         foreach(array_combine(request()->except('_token'), $quiz->questions()->pluck('correct_answer')->toArray()) as $student_answer => $correct_answer) {
             if($student_answer == $correct_answer) {
-                $pivot = Auth::user()->quizzes()->whereQuizName($quiz->quiz_name)->where('course_id', $course_id)->first()->pivot;
+                $pivot = Auth::user()->quizzes()->whereQuizName($quiz_name)->where('course_id', $course_id)->first()->pivot;
                 $pivot->score += 2;
                 $pivot->save();
             }
@@ -83,7 +83,7 @@ class ExaminationsController extends Controller
 
 
 
-        $quiz = Quiz::getActiveQuiz('', [$course_id])->first()->load('questions');
+        $quiz = Quiz::getActiveQuiz([$course_id])->where('quiz_name', $quiz_name)->first()->load('questions');
 
         return view('exam.show', compact('quiz'));
     }

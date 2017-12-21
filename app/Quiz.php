@@ -8,6 +8,8 @@ class Quiz extends Model
 {
     protected $guarded = ['active'];
 
+    public $with = ['course', 'faculty'];
+
     public function questions()
     {
         return $this->belongsToMany(Question::class);
@@ -18,7 +20,7 @@ class Quiz extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function faculties()
+    public function faculty()
     {
         return $this->belongsTo(Faculty::class);
     }
@@ -47,11 +49,12 @@ class Quiz extends Model
         return 'quiz-' . $lastQuiz;
     }
 
-    public static function getActiveQuiz($user = null, $course_id = [])
+    public static function getActiveQuiz($course_id = [])
     {
-        $user = $user ?: \Auth::user();
+        $user = \Auth::user();
         $requiredCourseId = $course_id ?: $user->courses()->pluck('course_id')->toArray();
+
         return static::where(['faculty_id' => $user->faculty_id, 'active' => true])
-        ->whereIn('course_id', $requiredCourseId)->get();
+        ->whereIn('course_id', $requiredCourseId)->latest()->get();
     }
 }

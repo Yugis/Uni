@@ -38,7 +38,7 @@ export default {
 
   methods: {
     newsfeed() {
-      this.$http.get('/get_related_posts/' + this.id)
+      this.$http.get('/api/get_related_posts/' + this.id)
           .then( (resp) => {
             resp.body.forEach( (post) => {
               this.$store.commit('add_post', post)

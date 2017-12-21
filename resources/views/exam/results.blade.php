@@ -29,6 +29,9 @@
                             <hr>
                         @endforeach
                     </ol>
+					
+					<p>Your total score is {{ $quiz->students()->get()->where('id', Auth::user()->id)->first()->pivot->score }} </p>
+					
                     <a class="btn btn-primary" href="/home">Finish</a>
                 </div>
             </div>

@@ -22,7 +22,7 @@ class StudentsTableSeeder extends Seeder
         $student->avatar = $avatar;
         $student->email = 'omar.tarek.18@e.com';
         $student->phone_number = 01153665774;
-        $student->password = bcrypt('atensec');
+        $student->password = bcrypt('password');
         $student->faculty_id = 2;
         $student->year_id = 4;
         $student->save();
@@ -43,7 +43,7 @@ class StudentsTableSeeder extends Seeder
         $student2->avatar = $avatar2;
         $student2->email = 'angievarona@e.com';
         $student2->phone_number = 01153665733;
-        $student2->password = bcrypt('atensec');
+        $student2->password = bcrypt('password');
         $student2->faculty_id = 2;
         $student2->year_id = 3;
         $student2->save();

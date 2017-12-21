@@ -8,7 +8,7 @@
                 {{ csrf_field() }}
                 <div class="panel panel-danger">
                     <div class="panel-heading">
-                        {{$quiz->quiz_name}}
+                        {{ $quiz->quiz_name }}
                     </div>
                     <div class="panel-body">
                         <ol>

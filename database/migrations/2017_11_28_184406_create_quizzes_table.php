@@ -18,7 +18,7 @@ class CreateQuizzesTable extends Migration
             $table->string('quiz_name');
             $table->integer('course_id')->unsigned();
             $table->unique(['quiz_name', 'course_id', 'faculty_id']);
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
             $table->integer('faculty_id')->unsigned();
             $table->timestamps();
         });

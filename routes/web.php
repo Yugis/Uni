@@ -40,9 +40,6 @@ Route::get('/courses/{slug}', 'CoursesController@show')->name('courses.show');
 
 Route::get('/MyCourses', 'CoursesController@myCourses')->name('student.mycourses');
 
-//Get/Post for taking quizzes
-Route::get('/{slug}/{quiz_name}', 'ExaminationsController@show')->name('take.quiz')->middleware('auth:web');
-Route::post('/{slug}/{quiz_name}', 'ExaminationsController@store')->name('exam.process')->middleware('auth:web');
 
 Route::get('student/{id}/{slug?}', 'StudentProfilesController@index')->name('student.profile');
 Route::get('/{id}/{slug?}/edit', 'StudentProfilesController@edit')->name('student.profile.edit');
@@ -58,7 +55,7 @@ Route::post('mark_as_read', function() {
    Auth::user()->unreadNotifications->markAsRead();
 });
 
-Route::get('get_related_posts/{id}', 'PostsController@feed');
+Route::get('api/get_related_posts/{id}', 'PostsController@feed');
 
 
 // Temporary Routes To Create Courses And Faculties.
@@ -72,6 +69,10 @@ Route::get('create.questions', 'QuestionsController@create')->middleware('auth:i
 Route::post('create.questions', 'QuestionsController@store')->middleware('auth:instructor');
 Route::get('/course/{slug}/create-quiz', 'QuizzesController@create')->name('quiz.create')->middleware('auth:instructor');
 Route::post('/course/{slug}/create-quiz', 'QuizzesController@store')->name('quiz.store')->middleware('auth:instructor');
+
+//Get/Post for taking quizzes
+Route::get('/{slug}/{quiz_name}', 'ExaminationsController@show')->name('take.quiz')->middleware('auth:web');
+Route::post('/{slug}/{quiz_name}', 'ExaminationsController@store')->name('exam.process')->middleware('auth:web');
 
 
 Route::get('/test', 'StudentsController@test');

@@ -40,13 +40,6 @@
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="location" class="col-md-4 control-label">Location</label>
-                <div class="col-md-8">
-                    <input id="location" type="text" class="form-control" name="location" value="{{ old('location', $student->profile->location) }}" autofocus placeholder="example Egypt - Giza">
-                </div>
-              </div>
-
               <div class="form-group">
                   <label for="facebook_link" class="col-md-4 control-label">Facebook Link</label>
                   <div class="col-md-8">

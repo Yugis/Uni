@@ -41,27 +41,7 @@
                   <textarea id="about" type="text" class="form-control" name="about" value="{{ old('about', $instructor->profile->about) }}" autofocus placeholder="Write an awesome auto-biography...">{{ $instructor->profile->about }}</textarea>
               </div>
             </div>
-
-              <div class="form-group">
-                  <label for="facebook_link" class="col-md-4 control-label">Facebook Link</label>
-                  <div class="col-md-8">
-                      <input id="facebook_link" type="text" class="form-control" name="facebook_link" value="{{ old('facebook_link', $instructor->profile->facebook_link) }}" placeholder="example: www.facebook.com/person">
-                  </div>
-              </div>
-
-              <div class="form-group">
-                  <label for="twitter_link" class="col-md-4 control-label">Twitter Link</label>
-                  <div class="col-md-8">
-                      <input id="twitter_link" type="text" class="form-control" name="twitter_link" value="{{ old('twitter_link', $instructor->profile->twitter_link) }}" placeholder="example: www.twitter.com/person">
-                  </div>
-              </div>
-
-              <div class="form-group">
-                  <label for="instagram_link" class="col-md-4 control-label">Instagram Link</label>
-                  <div class="col-md-8">
-                      <input id="instagram_link" type="text" class="form-control" name="instagram_link" value="{{ old('instagram_link',  $instructor->profile->instagram_link) }}" placeholder="example: www.instagram.com/person">
-                  </div>
-              </div>
+            
               <div class="form-group">
                   <div class="col-md-6 col-md-offset-8">
                       <button type="submit" class="btn btn-primary">

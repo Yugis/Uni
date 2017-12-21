@@ -17,9 +17,6 @@ class CreateInstructorProfilesTable extends Migration
           $table->increments('id');
           $table->integer('instructor_id');
           $table->text('about', 140)->nullable();
-          $table->string('facebook_link')->nullable();
-          $table->string('twitter_link')->nullable();
-          $table->string('instagram_link')->nullable();
           $table->timestamps();
       });
     }

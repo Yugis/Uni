@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('layouts.app', function($view) {
             if(! \Auth::guard('web')->check()) return;
             $user = \Auth::user();
-            $quizzes = \App\Quiz::getActiveQuiz($user);
+            $quizzes = \App\Quiz::getActiveQuiz();
             $view->with('quizzes', $quizzes);
         });
     }

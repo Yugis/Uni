@@ -3,10 +3,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/', 'Auth\LoginController@determineLoginType')->name('determine')->middleware(['guest:instructor,web']);
+
 Route::get('home', 'HomeController@index');
+
+// Temp
+
+Route::get('old', function () {
+    return view('old');
+});
 
 // Authentication
 Auth::routes();
+
 
 // Registering Students
 Route::get('register', 'StudentsController@create')->middleware('guest');

@@ -42,7 +42,7 @@ class Quiz extends Model
     public function determineName($slug)
     {
         $course = \App\Course::whereSlug($slug)->first();
-        $faculty = \App\Faculty::where('name', $course->faculty->name)->first();
+        $faculty = \App\Faculty::whereName($course->faculty->name)->first();
         $lastQuiz = \App\Quiz::where(['course_id' => $course->id, 'faculty_id' => $faculty->id])->count();
         $lastQuiz += 1;
 

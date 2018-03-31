@@ -44,26 +44,11 @@
                     </a>
                 </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                {{-- <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         &nbsp;
-                      {{-- <li class="dropdown">
-                            <a href="#" class="dropdown-toggle notificaiton"  data-toggle="dropdown" role="button" aria-expanded="false">
-                               Notifications
-                                <span id="count">{{ count(Auth::user()->unreadNotifications) }}</span>
-                                 <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu" id="showNofication">
-                                @foreach(Auth::user()->notifications as $note)
-                                    <li>
-                                        <a href="" class="{{ $note->read_at == null ? 'unread' : '' }}">
-                                                Instructor {!! $note->data['instructor'] !!} has created a new post {!! $note->data['body'] !!}
-                                        </a>
-                                    </li>
-                              @endforeach --}}
-                    </ul>
+                    </ul> --}}
 
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -128,16 +113,15 @@
                     <ul class="nav nav-pills navbar-nav navbar-right">
                     <!-- <li role="presentation" class="{{Request::is('create.course') ? "active" : "" }}"><a href="/create.course">Create Course</a></li>
                     <li role="presentation" class="{{Request::is('create.faculty') ? "active" : "" }}"><a href="/create.faculty">Create Faculty</a></li> -->
-                    <!-- @if(Auth::check())
-                      @if(Auth::guard('web')->check())
+                     @if(Auth::check())
+                     <!-- @if(Auth::guard('web')->check())
                         <unread></unread>
-                      @endif
+                      @endif -->
 
                       <li role="presentation" class="{{Request::is('home') ? "active" : "" }}"><a href="/home">Home</a></li>
-                    @endif -->
+                    @endif
                     </ul>
                 </div>
-            </div>
         </nav>
 
     		@if ($flash = session('success'))
@@ -154,14 +138,7 @@
 
         @yield('content')
 
-        <!-- @if(Auth::guard('web')->check())
-        <notification :id="{{ Auth::user()->id }}" ></notification>
-        <audio id="notification_audio">
-          <source src="{{ asset('audio/audio.mp3') }}">
-        </audio>
-        @endif -->
-
-	</div>
+    </div>
     <!-- Scripts -->
     <script src="{{ elixir('js/app.js') }}"></script>
   	<script>

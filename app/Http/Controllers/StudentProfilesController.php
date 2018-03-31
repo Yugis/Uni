@@ -17,7 +17,7 @@ class StudentProfilesController extends Controller
 
     public function index($id)
     {
-        $student = Student::where('id', $id)->first();
+        $student = Student::findOrFail($id);
 
         return view('profiles.student_profile', compact('student'));
     }
@@ -25,7 +25,7 @@ class StudentProfilesController extends Controller
     public function edit()
     {
         if (Auth::guard('web')->check()) {
-            $student = Student::where('id', Auth::user()->id)->first();
+            $student = Auth::user();
             return view('profiles.student_profile_edit', compact('student'));
         } else {
             return redirect('/instructor');
@@ -64,7 +64,7 @@ class StudentProfilesController extends Controller
                 'about' => $request->about
             ]);
         }
-        
+
         if($request->facebook_link !== $user->profile->facebook_link) {
             $user->profile->update([
                 'facebook_link' => $request->facebook_link

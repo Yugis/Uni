@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-  public $with = ['instructor'];
+    public $with = ['instructor'];
 
-  protected $fillable = ['body', 'instructor_id'];
+    protected $fillable = ['body', 'instructor_id'];
 
-  public function instructor()
-  {
-    return $this->belongsTo('App\Instructor');
-  }
+    public function instructor()
+    {
+        return $this->belongsTo('App\Instructor');
+    }
 }

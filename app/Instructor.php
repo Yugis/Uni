@@ -8,48 +8,48 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Instructor extends Authenticatable
 {
-  use Notifiable;
+    use Notifiable;
 
-  protected $fillable = ['avatar'];
+    protected $fillable = ['avatar'];
 
-  protected $guard = 'instructor';
+    protected $guard = 'instructor';
 
-  protected $hidden = [
-    'password', 'remember_token',
-  ];
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
-  public function faculties()
-  {
-    return $this->belongsToMany(Faculty::class);
-  }
+    public function faculties()
+    {
+        return $this->belongsToMany(Faculty::class);
+    }
 
-  public function courses()
-  {
-    return $this->belongsToMany(Course::class);
-  }
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
 
-  public function profile()
-  {
-    return $this->hasOne(Instructor_profile::class);
-  }
+    public function profile()
+    {
+        return $this->hasOne(Instructor_profile::class);
+    }
 
-  public function posts()
-  {
-    return $this->hasMany(Post::class);
-  }
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 
-  public function followers()
-  {
-    return $this->belongsToMany(Student::class, 'instructor_students')->withTimestamps();
-  }
+    public function followers()
+    {
+        return $this->belongsToMany(Student::class, 'instructor_students')->withTimestamps();
+    }
 
-  public function secret_id()
-  {
-    return $this->morphMany(SecretIds::class, 'owner');
-  }
+    public function secret_id()
+    {
+        return $this->morphMany(SecretIds::class, 'owner');
+    }
 
-  public function coursesPerFaculty($id)
-  {
-   return $this->courses()->where('faculty_id', $id)->pluck('name')->toArray();
-  }
+    public function coursesPerFaculty($id)
+    {
+        return $this->courses()->where('faculty_id', $id)->get();
+    }
 }

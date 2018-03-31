@@ -19,7 +19,7 @@ class InstructorsTableSeeder extends Seeder
         $instructor->first_name = 'John';
         $instructor->last_name = 'Doe';
         $instructor->full_name = 'John Doe';
-        $instructor->slug = 'John-Doe';
+        $instructor->slug = 'john-doe';
         $instructor->gender = 'male';
         $instructor->avatar = $male_avatar;
         $instructor->email = 'john@e.com';
@@ -37,7 +37,7 @@ class InstructorsTableSeeder extends Seeder
         $instructor_1->first_name = 'Jane';
         $instructor_1->last_name = 'Doe';
         $instructor_1->full_name = 'Jane Doe';
-        $instructor_1->slug = 'Jane-Doe';
+        $instructor_1->slug = 'jane-doe';
         $instructor_1->gender = 'female';
         $instructor_1->avatar = $female_avatar;
         $instructor_1->email = 'jane@e.com';
@@ -57,7 +57,7 @@ class InstructorsTableSeeder extends Seeder
         $instructor_3->first_name = 'Jeff';
         $instructor_3->last_name = 'Way';
         $instructor_3->full_name = 'Jeff Way';
-        $instructor_3->slug = 'Jeff-Way';
+        $instructor_3->slug = 'jeff-way';
         $instructor_3->gender = 'male';
         $instructor_3->avatar = $male_avatar;
         $instructor_3->email = 'jeff@e.com';

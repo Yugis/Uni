@@ -41,21 +41,21 @@ class LoginController extends Controller
     public function determineLoginType(Request $request)
     {
 
-        $guestID = \App\SecretIds::where('secret_id', $request->secretCode)->with('owner')->first();
+        $guest = \App\SecretIds::where('secret_id', $request->secretCode)->with('owner')->first();
 
-        if ($guestID->owner_id && $guestID->owner_type == "App\Student") {
+        if ($guest->owner_id && $guest->owner_type == "App\Student") {
             return redirect('/login');
         }
 
-        if (!$guestID->owner_id && $guestID->owner_type == "App\Student") {
+        if (!$guest->owner_id && $guest->owner_type == "App\Student") {
             return redirect('/register');
         }
 
-        if ($guestID->owner_id && $guestID->owner_type == "App\Instructor") {
+        if ($guest->owner_id && $guest->owner_type == "App\Instructor") {
             return redirect('instructor/login');
         }
 
-        if (!$guestID->owner_id && $guestID->owner_type == "App\Instructor") {
+        if (!$guest->owner_id && $guest->owner_type == "App\Instructor") {
             return redirect('instructor/register');
         }
     }

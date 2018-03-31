@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class SecretIds extends Model
 {
-  protected $guarded = [];
+    protected $guarded = [];
 
-  public $timestamps = false;
+    public $timestamps = false;
 
-  public function owner()
-  {
-    return $this->morphTo();
-  }
+    public function owner()
+    {
+        return $this->morphTo();
+    }
 }

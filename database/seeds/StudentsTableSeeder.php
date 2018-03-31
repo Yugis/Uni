@@ -17,7 +17,7 @@ class StudentsTableSeeder extends Seeder
         $student->first_name = 'Omar';
         $student->last_name = 'Tarek';
         $student->full_name = 'Omar Tarek';
-        $student->slug = 'Omar-Tarek';
+        $student->slug = 'omar-tarek';
         $student->gender = 'male';
         $student->avatar = $avatar;
         $student->email = 'omar.tarek.18@e.com';
@@ -38,7 +38,7 @@ class StudentsTableSeeder extends Seeder
         $student2->first_name = 'Angie';
         $student2->last_name = 'Varona';
         $student2->full_name = 'Angie Varona';
-        $student2->slug = 'Angie-Varona';
+        $student2->slug = 'angie-varona';
         $student2->gender = 'female';
         $student2->avatar = $avatar2;
         $student2->email = 'angievarona@e.com';

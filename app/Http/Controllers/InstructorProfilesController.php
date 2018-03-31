@@ -17,7 +17,7 @@ class InstructorProfilesController extends Controller
 
     public function index($id)
     {
-        $instructor = Instructor::where('id', $id)->first();
+        $instructor = Instructor::findOrFail($id);
 
         return view('profiles.instructor_profile', compact('instructor'));
     }
@@ -25,7 +25,7 @@ class InstructorProfilesController extends Controller
     public function edit()
     {
         if (Auth::guard('instructor')->check()) {
-            $instructor = Instructor::where('id', Auth::user()->id)->first();
+            $instructor = Auth::user();
             return view('profiles.instructor_profile_edit', compact('instructor'));
         } else {
             return redirect('/home');

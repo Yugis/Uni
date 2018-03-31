@@ -30,7 +30,7 @@
             @foreach($instructor->faculties as $faculty)
               {{$faculty->name}}: <br> --------------------------<br>
               @foreach($instructor->coursesPerFaculty($faculty->id) as $course)
-                <a href="{{ route('courses.show', ['name' => $course]) }}">{{$course}}</a> <br>
+                <a href="{{ route('courses.show', ['slug' => $course->slug]) }}">{{$course->name}}</a> <br>
               @endforeach
               <hr>
             @endforeach

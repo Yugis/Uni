@@ -1017,7 +1017,13 @@
     </head>
     <body>
         <nav>
-            <a href="#" id="signInButton">Sign In</a>
+            @if (Auth::guard('instructor')->check())
+                <a href="{{ url('/instructor') }}">Dashboard</a>
+            @elseif (Auth::guard('web')->check())
+                <a href="{{ url('/home') }}">Home</a>
+            @else
+                <a href="#" id="signInButton">Sign In</a>
+            @endif
         </nav>
 
         <header>

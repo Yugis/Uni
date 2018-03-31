@@ -8,10 +8,8 @@ Route::post('/', 'Auth\LoginController@determineLoginType')->name('determine')->
 Route::get('home', 'HomeController@index');
 
 // Temp
+Route::get('/test', 'StudentsController@test');
 
-Route::get('old', function () {
-    return view('old');
-});
 
 // Authentication
 Auth::routes();
@@ -82,6 +80,3 @@ Route::post('/course/{slug}/create-quiz', 'QuizzesController@store')->name('quiz
 //Get/Post for taking quizzes
 Route::get('/{slug}/{quiz_name}', 'ExaminationsController@show')->name('take.quiz')->middleware('auth:web');
 Route::post('/{slug}/{quiz_name}', 'ExaminationsController@store')->name('exam.process')->middleware('auth:web');
-
-
-Route::get('/test', 'StudentsController@test');

@@ -14,6 +14,7 @@ class QuizzesController extends Controller
     {
         $this->middleware('auth:instructor');
     }
+    
     public function create($slug)
     {
         $course = Course::whereSlug($slug)->first();
@@ -36,7 +37,7 @@ class QuizzesController extends Controller
 
         $quiz->quiz_name = $quiz_name;
         $quiz->course_id = $course->id;
-        $quiz->faculty_id = Faculty::where('name', $course->faculty->name)->first()->id;
+        $quiz->faculty_id = Faculty::whereName($course->faculty->name)->first()->id;
         $quiz->save();
 
         foreach($request->id as $key => $value) {

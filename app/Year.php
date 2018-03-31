@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Year extends Model
 {
-  protected $fillable = [
-      'name',
-  ];
+    protected $fillable = [
+        'name',
+    ];
 
-  public function faculties()
-  {
-      return $this->belongsToMany('App\Faculty');
-  }
+    public function faculties()
+    {
+        return $this->belongsToMany('App\Faculty');
+    }
 
-  public function students()
-  {
-    return $this->hasMany('App\Student');
-  }
+    public function students()
+    {
+        return $this->hasMany('App\Student');
+    }
 }

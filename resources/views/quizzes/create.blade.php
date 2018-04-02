@@ -23,10 +23,10 @@
                 <hr>
               @empty
               </ul>
-              There are no questions yet, <a href="{{ route('questions.create')}}">create some?</a>
+              <p>There are no questions yet, <a href="{{ route('questions.create')}}">create some?</a></p>
             @endforelse
 
-            <input type="submit" class="btn btn-success" value="Create Quiz">
+            <input type="submit" class="btn btn-success" value="Create Quiz" {{ $questions->count() ? '' : 'disabled'}}>
           </div>
         </form>
       </div>

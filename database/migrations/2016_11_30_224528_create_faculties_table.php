@@ -16,6 +16,8 @@ class CreateFacultiesTable extends Migration
         Schema::create('faculties', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('name')->unique();
+            $table->string('lecture_schedule')->nullable();
+            $table->string('exam_schedule')->nullable();
             $table->timestamps();
         });
     }

@@ -19,7 +19,9 @@ class StudentsController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['guest:instructor,web'])->except(['index', 'check']);
+        $this->middleware(['guest:admin'])->only(['create', 'store']);
+        $this->middleware(['guest:instructor'])->only(['create', 'store']);
+        $this->middleware(['guest:web'])->only(['create', 'store']);
     }
 
     // public function test()

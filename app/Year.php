@@ -12,11 +12,16 @@ class Year extends Model
 
     public function faculties()
     {
-        return $this->belongsToMany('App\Faculty');
+        return $this->belongsToMany(Faculty::class);
     }
 
     public function students()
     {
-        return $this->hasMany('App\Student');
+        return $this->hasMany(Student::class);
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
     }
 }

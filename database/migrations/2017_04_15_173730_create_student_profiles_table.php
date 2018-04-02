@@ -15,7 +15,7 @@ class CreateStudentProfilesTable extends Migration
   {
     Schema::create('student_profiles', function (Blueprint $table) {
       $table->increments('id');
-      $table->integer('student_id');
+      $table->integer('student_id')->unsigned();
       $table->text('about', 140)->nullable();
       $table->string('facebook_link')->nullable();
       $table->string('twitter_link')->nullable();

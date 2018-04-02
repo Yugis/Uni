@@ -23,12 +23,12 @@ class InstructorsTableSeeder extends Seeder
         $instructor->gender = 'male';
         $instructor->avatar = $male_avatar;
         $instructor->email = 'john@e.com';
-        $instructor->phone_number = 01153665777;
+        $instructor->phone_number = '01153665777';
         $instructor->password = bcrypt('password');
         $instructor->office_location = 'A26';
         $instructor->save();
         $instructor->faculties()->attach(2);
-        $instructor->courses()->attach([2, 3]);
+        $instructor->courses()->attach([44, 39]);
         \App\SecretIds::where('secret_id', 33)->first()->update(['owner_id' => $instructor->id]);
         $instructor->profile()->create(['instructor_id' => $instructor->id]);
 
@@ -41,7 +41,7 @@ class InstructorsTableSeeder extends Seeder
         $instructor_1->gender = 'female';
         $instructor_1->avatar = $female_avatar;
         $instructor_1->email = 'jane@e.com';
-        $instructor_1->phone_number = 01153665778;
+        $instructor_1->phone_number = '01153665778';
         $instructor_1->password = bcrypt('password');
         $instructor_1->office_location = 'A23';
         $instructor_1->save();
@@ -61,7 +61,7 @@ class InstructorsTableSeeder extends Seeder
         $instructor_3->gender = 'male';
         $instructor_3->avatar = $male_avatar;
         $instructor_3->email = 'jeff@e.com';
-        $instructor_3->phone_number = 01153665666;
+        $instructor_3->phone_number = '01153665666';
         $instructor_3->password = bcrypt('password');
         $instructor_3->office_location = 'A24';
         $instructor_3->save();

@@ -9,11 +9,13 @@ class Course extends Model
 {
     protected $fillable = [
         'name',
-        'faculty_id',
-        'year_id',
         'description',
-        'appointment',
         'room_id',
+        'finals_mark',
+        'total_grades',
+        'max_attendance',
+        'year_id',
+        'faculty_id',
         'slug'
     ];
 
@@ -29,7 +31,7 @@ class Course extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Student::class);
+        return $this->belongsToMany(Student::class)->withPivot('completed', 'finals', 'grades', 'attendance')->withTimestamps();
     }
 
     public function questions()
@@ -40,5 +42,10 @@ class Course extends Model
     public function quizzes()
     {
         return $this->hasMany(Quiz::class);
+    }
+
+    public function year()
+    {
+        return $this->belongsTo(Year::class);
     }
 }

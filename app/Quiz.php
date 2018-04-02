@@ -8,7 +8,7 @@ class Quiz extends Model
 {
     protected $guarded = ['active'];
 
-    public $with = ['course', 'faculty'];
+    public $with = ['course', 'faculty', 'students'];
 
     public function questions()
     {
@@ -46,7 +46,7 @@ class Quiz extends Model
         $lastQuiz = \App\Quiz::where(['course_id' => $course->id, 'faculty_id' => $faculty->id])->count();
         $lastQuiz += 1;
 
-        return 'quiz-' . $lastQuiz;
+        return 'Quiz-' . $lastQuiz;
     }
 
     public static function getActiveQuiz($course_id = [])

@@ -11,7 +11,9 @@ class InstructorsLoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['guest:instructor,web']);
+        $this->middleware('guest:web');
+        $this->middleware('guest:admin');
+        $this->middleware('guest:instructor');
     }
 
     public function showLoginForm()

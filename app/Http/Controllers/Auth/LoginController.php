@@ -35,7 +35,9 @@ class LoginController extends Controller
     */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest:web', ['except' => 'logout']);
+        $this->middleware('guest:admin', ['except' => 'logout']);
+        $this->middleware('guest:instructor', ['except' => 'logout']);
     }
 
     public function determineLoginType(Request $request)
@@ -57,6 +59,14 @@ class LoginController extends Controller
 
         if (!$guest->owner_id && $guest->owner_type == "App\Instructor") {
             return redirect('instructor/register');
+        }
+
+        if ($guest->owner_id && $guest->owner_type == "App\Admin") {
+            return redirect('manager/login');
+        }
+
+        if (!$guest->owner_id && $guest->owner_type == "App\Admin") {
+            return redirect()->back();
         }
     }
 }

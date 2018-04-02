@@ -39,7 +39,7 @@
                                     <hr>
                                 @endforeach
                             </ol>
-                            <input type="submit" class="btn btn-success" value="Submit" style="display: block; width: 100%;">
+                            <input type="submit" class="btn btn-success" value="Submit" id="examSubmitButton">
                         </div>
                     </div>
                 </form>

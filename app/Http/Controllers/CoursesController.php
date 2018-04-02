@@ -13,7 +13,7 @@ class CoursesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:web,instructor')->except(['create', 'store']);
+        $this->middleware('auth:web,instructor,admin');
     }
 
     // Managing Attendance
@@ -58,9 +58,11 @@ class CoursesController extends Controller
 
     public function store(Request $request)
     {
+        $students = Student::where('year_id', $request->yearName)->pluck('id');
         $faculty = Faculty::whereName($request->facultyName)->first();
         $year = Year::whereName($request->yearName)->first();
         $course = Course::create(['name' => $request->courseName, 'slug' => str_slug($request->courseName, '-'), 'faculty_id' => $faculty->id, 'year_id' => $year->id]);
+        $course->students()->sync($students);
 
         return redirect('create.course');
     }

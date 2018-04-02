@@ -32,7 +32,7 @@
             Edit your profile
         </div>
         <div class="panel-body">
-          <form class="form-horizontal" role="form" method="POST" action="{{ route('instructor.profile.edit', ['id' => $instructor->id, 'slug' => $instructor->slug]) }}">
+          <form class="form-horizontal" role="form" method="POST" action="{{ route('instructor.profile.update', ['id' => $instructor->id, 'slug' => $instructor->slug]) }}">
             {{ csrf_field() }}
 
           <div class="form-group">
@@ -41,7 +41,7 @@
                   <textarea id="about" type="text" class="form-control" name="about" value="{{ old('about', $instructor->profile->about) }}" autofocus placeholder="Write an awesome auto-biography...">{{ $instructor->profile->about }}</textarea>
               </div>
             </div>
-            
+
               <div class="form-group">
                   <div class="col-md-6 col-md-offset-8">
                       <button type="submit" class="btn btn-primary">

@@ -16,7 +16,9 @@ class SecretIdsTableSeeder extends Seeder
       $dem->secret_id = $x;
       if($x < 50) {
         $dem->owner_type = 'App\Instructor';
-      } else {
+    } elseif ($x >= 80) {
+        $dem->owner_type = 'App\Admin';
+    } else {
         $dem->owner_type = 'App\Student';
       }
       $dem->save();

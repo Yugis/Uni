@@ -132,6 +132,7 @@
                 background: url(/storage/defaults/welcome1.jpeg) no-repeat 0 -200px;
                 text-align: center;
                 width: 100%;
+                background-attachment: fixed;
             }
 
             #showcase:before {
@@ -179,7 +180,7 @@
                 box-shadow: -3px 12px 20px 0px black;
                 padding: 8px;
                 width: 70%;
-                height: 70%;
+                height: 100%;
                 text-align: center;
                 display: flex;
                 align-items: center;
@@ -1019,6 +1020,8 @@
         <nav>
             @if (Auth::guard('instructor')->check())
                 <a href="{{ url('/instructor') }}">Dashboard</a>
+            @elseif (Auth::guard('admin')->check())
+                <a href="{{ url('/manager') }}">Dashboard</a>
             @elseif (Auth::guard('web')->check())
                 <a href="{{ url('/home') }}">Home</a>
             @else
@@ -1029,7 +1032,7 @@
         <header>
             <div class="container">
                 <div id="branding">
-                    <a href="#"><h1>Akhbar El Youm Academy</h1></a>
+                    <a href="#"><h1>Akhbar El Yom Academy</h1></a>
                 </div>
                 <div class="nav">
                     <ul class="menu cf">
@@ -1076,7 +1079,7 @@
             <div id="showcase">
                 <div class="content-wrapper animated fadeInUp">
                     <div class="title">
-                        <h1>Akhbar El Youm Academy</h1>
+                        <h1>Akhbar El Yom Academy</h1>
                     </div>
 
                     <div id="subTitle">
@@ -1166,7 +1169,6 @@
           </div><!-- modal -->
         </div><!-- overlay -->
 
-
         <footer>
             <section class="footer">
                 <div class="contact">
@@ -1214,13 +1216,12 @@
             </section>
             <section class="copyright">
                 <h4>
-                    Akhbar El Youm | Copyright © 2017 AYA , All rights reserved.
+                    Akhbar El Yom | Copyright © 2017 AYA , All rights reserved.
                 </h4>
 
                 <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
             </section>
         </footer>
-
 
         <script src="{{ elixir('js/app.js') }}"></script>
         <script>

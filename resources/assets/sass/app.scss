@@ -14,6 +14,12 @@ html, body {
     background-color: $body-bg;
 }
 
+a:hover, a:focus {
+    color: #216a94;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 #app {
     height: 100%;
 }
@@ -82,15 +88,57 @@ html, body {
     text-align: center;
 }
 
-#panel-top {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
+#admin-dashboard-heading {
+    text-align: center;
+    margin: 4em 0;
+    color: #fff;
+    width: 100%;
+    padding: 7rem;
+    background: linear-gradient(to top, #000428, #004e92);
+
+    h1 {
+        font-size: 48px;
+    }
+
+    p {
+        font-size: 20px;
+    }
 }
 
-#panel-body {
-    display: flex;
-    flex: 1;
+[data-dashboard-panel] {
+    margin: 1rem;
+
+    .panel-heading {
+        background: linear-gradient(to top, #000428, #004e92);
+        border: none;
+    }
+
+    ul {
+        width: 100%;
+        padding: 0;
+
+        li {
+            list-style-type: none;
+            margin: 30px 5px 30px 5px;
+            font-size: 16px;
+            font-family: Arial;
+
+            a {
+                border: 1px solid darkseagreen;
+                padding: 1rem;
+                border-radius: 7px;
+                text-decoration: none;
+                transition: 0.3s linear;
+                display: flex;
+                justify-content: center;
+
+                &:hover {
+                    background: deepskyblue;
+                    color:white;
+                }
+            }
+        }
+    }
 }
 
 #flash-success {
@@ -123,6 +171,11 @@ html, body {
 #statusButton{
     display: flex;
     flex-direction: column;
+}
+
+#examSubmitButton{
+    display: block;
+    width: 100%;
 }
 
 .countdown {
@@ -197,40 +250,20 @@ html, body {
     padding-top: 20px;
 }
 
-.row.dashboard-flex {
+.panels-flex {
     display: flex;
-    justify-content: center;
-    padding-top: 35px;
     text-align: center;
-}
-
-.row.panels-flex {
-    display: flex;
     justify-content: space-between;
     text-align: center;
-}
-
-.first-panel {
-    display: flex;
-    width: 30%;
-}
-
-.second-panel {
-    display: flex;
-    width: 30%;
-}
-
-.third-panel {
-    display: flex;
-    width: 30%;
+    align-items: flex-start;
+    box-shadow: 1px 0px 20px 4px rgba(0,0,0,0.3);
 }
 
 .templinks {
-    color: $primary-color;
-    border: 1px solid $panel-danger-border-color;
+    color: firebrick;
+    border: 1px solid firebrick;
     text-decoration: none;
     padding: 10px;
-    display: ruby-text;
     border-radius: 5px;
     font-family: Arial;
 }
@@ -243,26 +276,32 @@ html, body {
     transition: all 0.5s;
 }
 
+.fixed-btn {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: Arial;
+    position: fixed;
+    top: 90%;
+    right: 26px;
+    background: rgb(0, 27, 74);
+    transition: all 0.3s;
+    z-index: 2;
+}
+
+.fixed-btn:hover, .fixed-btn:focus {
+    color: gold;
+    background-color: #800000;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
 .container-index {
     height: 470px;
     display: flex;
     align-items: center;
     flex-direction: column;
-}
-
-.course-index-heading {
-    min-height: 20%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    font-style: italic;
-    font-family: serif;
-    h1 {
-        flex: 1;
-        text-align: center;
-        color: whitesmoke;
-    }
 }
 
 .flex-align-baseline {
@@ -279,88 +318,51 @@ html, body {
     }
 }
 
-.course-index-heading h2, h3, h4 {
-    color: $primary-color;
-}
-
-.students-index-flex {
-    height: 60%;
-    width: 100%;
-    display: flex;
-    font-style: italic;
-    font-size: 18px;
-    color: #ff0066;
-}
-
 .table {
-    color: $table-color;
-    // color: brown;
-    background-color: $primary-color;
+    background: gainsboro;
+    color: black;
+    font-size: 1.6rem;
+    text-align: center;
+    font-family: sans-serif;
+    border: 1px solid #b22222;
+
+    th {
+        background: firebrick;
+        color: white;
+        text-align: center;
+        border: solid 1px #999;
+        text-transform: capitalize;
+    }
+
+    td {
+        border: 1px solid firebrick;
+    }
 }
 
-thead {
-    border: 1px double;
+.list-group {
+    box-shadow: 1px 1px 13px 0px rgba(0,0,0,0.4);
 }
 
-tr {
-    display: flex;
-    justify-content: space-around;
-    flex: 1;
+a.list-group-item {
+    transition: all 0.3s;
+    text-decoration: none;
+    font-size: 12pt;
+    font-family: sans-serif;
+    color: #3097d1;
 }
 
-th {
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    min-width: 25%;
-    color: coral;
+a.list-group-item:hover,
+a.list-group-item:focus,
+button.list-group-item:hover,
+button.list-group-item:focus {
+    background: #3097D1;
+    color: #fff;
 }
 
-td {
-    border: 1px double;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    flex-direction: column;
-    background-color: whitesmoke;
-    margin: 5px;
-    border-radius: 50px;
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
     a {
-        text-decoration: none;
-        color: brown;
+        color: white;
     }
-    a:hover {
-        text-decoration: none;
-    }
-    &:hover {
-        background-color: brown;
-        transition: all 0.5s;
-        a {
-            color: brown;
-            border-color: brown;
-            border-radius: 50px;
-            background-color: whitesmoke;
-            padding: 0px 10px 0px 10px;
-            &:hover {
-                cursor: pointer;
-                color: whitesmoke;
-                background-color: $navbar-default;
-                transition: all 0.5s;
-            }
-        }
-    }
-}
-
-tbody {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.table > thead > tr > th {
-    vertical-align: bottom;
-    border-bottom: transparent;
 }
 
 .panel-primary > .panel-heading {
@@ -370,17 +372,13 @@ tbody {
 }
 
 .panel-danger {
-    // border-color: #ffccff;
     border-color: $panel-danger-border-color;
-    display: flex;
-    flex-direction: column;
 }
 
 .panel-danger > .panel-heading {
     color: #ffff66;
     background-color: $primary-color;
     border-color: $panel-danger-border-color;
-    // border-color: #ffccff;
 }
 
 .navbar-default {

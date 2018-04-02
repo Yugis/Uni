@@ -12,7 +12,7 @@ class StudentProfilesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:web,instructor']);
+        $this->middleware(['auth:web,instructor,admin']);
     }
 
     public function index($id)
@@ -40,18 +40,13 @@ class StudentProfilesController extends Controller
             if($user->avatar !== 'public/defaults/avatars/male.png' && $user->avatar !== 'public/defaults/avatars/female.png') {
                 $lastavatar = $user->avatar;
                 Storage::delete($lastavatar);
-
-                $user->update([
-                    'avatar' => $request->avatar->store('public/uploads/avatars')
-                ]);
-                return redirect(route('student.profile', ['id' => $user->id, 'slug' => $user->slug ]));
-            } else {
-                $user->update([
-                    'avatar' => $request->avatar->store('public/uploads/avatars')
-                ]);
-                return redirect(route('student.profile', ['id' => $user->id, 'slug' => $user->slug ]));
             }
+            $user->update([
+                'avatar' => $request->avatar->store('public/uploads/avatars')
+            ]);
+            return redirect(route('student.profile', ['id' => $user->id, 'slug' => $user->slug ]));
         }
+        
         $this->validate($request, [
             'about' => 'max:140',
             'facebook_link' => 'max:100|min:15|string|unique:student_profiles,facebook_link,'.$user->id,

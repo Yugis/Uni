@@ -34,6 +34,13 @@ $factory->define(App\Question::class, function (Faker\Generator $faker) {
         'option_3' => $faker->word,
         'option_4' => $faker->word,
         'correct_answer' => $answer,
-        'course_id' => 2,
+        'course_id' => 39,
     ];
+    /*
+     *    When you want to call it with a different course id, do this
+     *    in tinker:
+     *    factory(App\Question::class, 10)->create(['course_id' => 39]);
+     *
+     */
+
 });

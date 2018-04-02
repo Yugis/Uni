@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Faculty extends Model
 {
-    protected $fillable = [
-        'name',
-    ];
+    protected $guarded = [];
 
     public function students()
     {
@@ -17,7 +15,12 @@ class Faculty extends Model
 
     public function instructors()
     {
-        return $this->belongsToMany(instructor::class);
+        return $this->belongsToMany(Instructor::class);
+    }
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
     }
 
     public function courses()

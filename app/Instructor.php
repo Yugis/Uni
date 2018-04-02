@@ -45,7 +45,12 @@ class Instructor extends Authenticatable
 
     public function secret_id()
     {
-        return $this->morphMany(SecretIds::class, 'owner');
+        return $this->morphOne(SecretIds::class, 'owner');
+    }
+
+    public function getSecretId()
+    {
+        return $this->morphOne(SecretIds::class, 'owner')->first()->secret_id;
     }
 
     public function coursesPerFaculty($id)

@@ -26,6 +26,7 @@ class CreateInstructorsTable extends Migration
       $table->string('password');
       $table->string('office_location', 3);
       $table->string('phone_number', 11);
+      $table->text('about', 140)->nullable();
       $table->rememberToken();
       $table->timestamps();
     });

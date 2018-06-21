@@ -101,6 +101,7 @@ class AdminProfilesController extends Controller
         $admin->last_name = ucfirst($request->last_name);
         $admin->full_name = $admin->first_name . ' ' . $admin->last_name;
         $admin->slug = str_slug($admin->first_name . ' ' . $admin->last_name, '-');
+        $admin->email = $request->email;
         $admin->faculty_id = $request->faculty_id;
 
         if($request->has('password')) {
@@ -108,7 +109,6 @@ class AdminProfilesController extends Controller
         }
 
         $admin->save();
-        $admin->profile->save();
 
         \Session::flash('success', 'Profile updated successfully');
 

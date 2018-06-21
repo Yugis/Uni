@@ -31,6 +31,7 @@
 					<button class="btn btn-primary" type="submit">Send</button>
 				</div>
 			</form>
+			@include('errors.errors')
 		</div>
 	</div>
 </div>

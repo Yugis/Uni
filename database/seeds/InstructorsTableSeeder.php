@@ -29,8 +29,6 @@ class InstructorsTableSeeder extends Seeder
         $instructor->save();
         $instructor->faculties()->attach(2);
         $instructor->courses()->attach([44, 39]);
-        \App\SecretIds::where('secret_id', 33)->first()->update(['owner_id' => $instructor->id]);
-        $instructor->profile()->create(['instructor_id' => $instructor->id]);
 
         $instructor_1 = new \App\Instructor();
         $instructor_1->job_title = 'Teaching Assistant';
@@ -50,8 +48,6 @@ class InstructorsTableSeeder extends Seeder
 
         \App\SecretIds::where('secret_id', 44)->first()->update(['owner_id' => $instructor_1->id]);
 
-        $instructor_1->profile()->create(['instructor_id' => $instructor_1->id]);
-
         $instructor_3 = new \App\Instructor();
         $instructor_3->job_title = 'Instructor';
         $instructor_3->first_name = 'Jeff';
@@ -69,7 +65,5 @@ class InstructorsTableSeeder extends Seeder
         $instructor_3->courses()->attach(4);
 
         \App\SecretIds::where('secret_id', 22)->first()->update(['owner_id' => $instructor_3->id]);
-
-        $instructor_3->profile()->create(['instructor_id' => $instructor_3->id]);
     }
 }

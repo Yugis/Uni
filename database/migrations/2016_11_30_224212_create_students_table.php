@@ -24,7 +24,6 @@ class CreateStudentsTable extends Migration
       $table->string('slug');
       $table->boolean('gender');
       $table->string('phone_number', 11);
-      $table->string('emergency_phone_number', 11)->nullable();
       $table->integer('faculty_id')->unsigned();
       $table->integer('year_id')->unsigned();
       $table->rememberToken();

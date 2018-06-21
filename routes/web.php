@@ -5,14 +5,12 @@ Route::get('/', function () {
 
 Route::post('/', 'Auth\LoginController@determineLoginType')->name('determine')->middleware(['guest:instructor,web']);
 
-Route::get('home', 'HomeController@index');
-
-// Temp
-Route::get('/test', 'StudentsController@test');
-
+Route::get('schedule', 'HomeController@index')->name('home');
 
 // Authentication
 Auth::routes();
+
+Route::get('/pages/{name}', 'PagesController@index')->name('pages.index');
 
 
 // Registering Students
@@ -29,12 +27,16 @@ Route::group(['prefix' => 'instructor'], function () {
     Route::get('/register', 'InstructorsController@create')->name('instructor.register');
     Route::post('/register', 'InstructorsController@store')->name('instructor.submit.register');
 
-    Route::get('/', 'InstructorsController@index')->name('instructor.dashboard')->middleware('auth:instructor');
-    Route::get('/schedule', 'InstructorsController@myCourses')->name('instructor.schedule')->middleware('auth:instructor');
-    Route::get('/{id}/{slug?}', 'InstructorProfilesController@index')->name('instructor.profile');
-    Route::post('/{id}/{slug?}', 'PostsController@store')->name('instructor.post');
-    Route::get('/{id}/{slug?}/edit', 'InstructorProfilesController@edit')->name('instructor.profile.edit');
-    Route::post('/{id}/{slug?}/edit', 'InstructorProfilesController@update')->name('instructor.profile.update');
+    Route::get('/mail/class/prepare', 'InstructorsController@classMail')->name('instructor.prepare.class.mail')->middleware('auth:instructor');
+    Route::post('/mail/class/prepare', 'InstructorsController@prepareClassMail')->name('instructor.send.class.mail')->middleware('auth:instructor');
+
+    Route::get('/schedule', 'InstructorsController@index')->name('instructor.dashboard')->middleware('auth:instructor');
+    Route::get('/MyCourses', 'InstructorsController@myCourses')->name('instructor.mycourses')->middleware('auth:instructor');
+    Route::get('/courses/{slug}', 'InstructorsController@showCourse')->name('instructor.course.show')->middleware('auth:instructor');
+    Route::get('/{id}/{slug?}', 'InstructorsController@myProfile')->name('instructor.profile')->middleware('auth:instructor,web');
+    Route::get('/{id}/{slug?}/edit', 'InstructorsController@edit')->name('instructor.profile.edit')->middleware('auth:instructor');
+    Route::post('/{id}/{slug?}/edit', 'InstructorsController@update')->name('instructor.profile.update')->middleware('auth:instructor');
+
 });
 
 Route::group(['prefix' => 'manager'], function () {
@@ -56,7 +58,6 @@ Route::group(['prefix' => 'manager'], function () {
     
     Route::get('/accounts/deactivated/{slug}/delete', 'AdminProfilesController@showDeleteForm')->name('admin.delete.account');
     Route::post('/accounts/deactivated/{slug}/delete', 'AdminProfilesController@destroy')->name('admin.destroy.account');
-
 
     Route::get('/courses/{slug}', 'AdminCourseController@showCourse')->name('admin.show.course')->middleware('auth:admin');
     Route::post('/courses/{slug}', 'AdminCourseController@updateScores')->name('admin.upadte.score')->middleware('auth:admin');
@@ -85,35 +86,16 @@ Route::get('students', 'StudentsController@index')->middleware(['auth:web,instru
 
 Route::get('/instructors', 'InstructorsController@all')->name('all.instructors')->middleware(['auth:web,instructor,admin']);
 
-Route::get('/courses/{slug}', 'CoursesController@show')->name('courses.show');
+Route::get('/courses/{slug}', 'CoursesController@show')->name('student.course.show');
 
 Route::get('/MyCourses', 'CoursesController@myCourses')->name('student.mycourses');
 
 
-Route::get('student/{id}/{slug?}', 'StudentProfilesController@index')->name('student.profile');
-Route::get('/{id}/{slug?}/edit', 'StudentProfilesController@edit')->name('student.profile.edit');
-Route::post('/{id}/{slug?}/edit', 'StudentProfilesController@update')->name('student.profile.edit');
-
-Route::get('/status/{id}', 'StudentsController@check');
-Route::get('/toggle/{id}', 'StudentsController@toggle');
-Route::get('get_unread', function() {
-    return Auth::user()->unreadNotifications;
-});
-
-Route::post('mark_as_read', function() {
-    Auth::user()->unreadNotifications->markAsRead();
-});
+Route::get('student/{id}/{slug?}', 'StudentsController@myProfile')->name('student.profile');
+Route::post('student/{id}/{slug?}/edit', 'StudentsController@update')->name('student.profile.update');
 
 Route::get('api/get_course_students/{slug}', 'AdminCourseController@getCourseStudents');
 
-Route::get('api/get_related_posts/{id}', 'PostsController@feed');
-
-
-// Temporary Routes To Create Courses And Faculties.
-Route::get('create.faculty', 'FacultyController@create');
-Route::post('create.faculty', 'FacultyController@store');
-Route::get('create.course', 'CoursesController@create');
-Route::post('create.course', 'CoursesController@store');
 // Create Questions & Quizzes.
 Route::get('create.questions', 'QuestionsController@create')->middleware('auth:instructor')->name('questions.create');
 /* You need to edit questions.create for production, make it look like quiz.create by editing the dropdown menue to have all courses to choose from*/

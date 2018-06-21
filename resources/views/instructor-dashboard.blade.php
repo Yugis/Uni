@@ -1,69 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row dashboard-flex">
-        <div class="col-md-10">
-            <div class="panel panel-danger animated fadeInDown">
-                <div class="panel-heading">Welcome instructor {{Auth::user()->last_name}}, we hope you're doing fine</div>
 
-                <div class="panel-body">
-                    Instructor Dashboard
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="col-md-8 col-md-offset-3">
+  <div style="background-color: white; padding: 15px; margin-bottom: 10px;">    
+    <h3>Lectures Schedule:</h3>
+    @foreach($faculties as $faculty)
+            <h1>{{ $faculty->name }}</h1>
+        @if(isset($faculty->lecture_schedule))
+            <img src="{{ Storage::url($faculty->lecture_schedule) }}" width="75%" height="30%" style="background-color: ghostwhite;">
+        @else
+            <p>There is no schedule available yet, please try again later or try contacting your admin.</p>
+        @endif
+    @endforeach
 
-<div class="container">
-	<div class="row panels-flex">
-		<div class="first-panel animated fadeInLeft">
-			<div class="panel panel-danger">
-				<div class="panel-heading">Instructors</div>
-          <div class="panel-top" id="panel-top">
-  					<div class="panel-body" id="panel-body">
-  						Want to check on the profiles of other instructors?
-  					  <br>
-            </div>
-            <div>
-              <a class="templinks" href="{{ route('all.instructors') }}">View All Instructors</a>
-            </div>
-          </div>
+    <hr>
 
-  		</div>
-		</div>
-			<div class="second-panel animated fadeInUp">
-				<div class="panel panel-danger">
-					<div class="panel-heading">Schedule</div>
-          <div class="panel-top" id="panel-top">
-						<div class="panel-body" id="panel-body">
-							Would you like to check on your schedule for today?
-							<br>
-            </div>
-
-            <div>
-							<a class="templinks" href="{{ route('instructor.schedule') }}">My Schedule</a>
-            </div>
-          </div>
-				</div>
-			</div>
-
-
-				<div class="third-panel animated fadeInRight">
-					<div class="panel panel-danger">
-						<div class="panel-heading">Students</div>
-            <div class="panel-top" id="panel-top">
-							<div class="panel-body" id="panel-body">
-								You can check on all of the students from here
-								<br>
-              </div>
-              <div>
-    						<a class="templinks" href="{{ url('students') }}">View All Students</a>
-              </div>
-            </div>
-					</div>
-				</div>
-	</div>
+    <h3>Exams Schedule:</h3>
+    @if(isset($faculty->exam_schedule))
+    <img src="{{ Storage::url($faculty->exam_schedule) }}" width="100%" height="50%" style="background-color: ghostwhite;">
+    @else
+    <p>There is no exam schedule available yet, please try again later or try contacting your admin.</p>
+    @endif
+  </div>
 </div>
 
 @endsection

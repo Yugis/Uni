@@ -25,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $faculty = auth()->user()->faculty;
+        return view('schedule', compact('faculty'));
     }
 }

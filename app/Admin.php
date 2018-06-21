@@ -26,16 +26,6 @@ class Admin extends Authenticatable
         return $this->belongsTo(Faculty::class);
     }
 
-    public function profile()
-    {
-        return $this->hasOne(Admin_profile::class);
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-
     public function secret_id()
     {
         return $this->morphOne(SecretIds::class, 'owner');

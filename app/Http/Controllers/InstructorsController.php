@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Year;
 use App\Course;
 use App\Faculty;
 use App\Instructor;
 use Illuminate\Http\Request;
-use App\Http\RegistersInstructors;
 use Illuminate\Validation\Rule;
+use App\Http\RegistersInstructors;
+use App\Mail\InstructorEmailToClass;
+use Illuminate\Support\Facades\Storage;
 
 class InstructorsController extends Controller
 {
@@ -31,7 +34,9 @@ class InstructorsController extends Controller
 
     public function index()
     {
-        return view('instructor-dashboard');
+        $faculties = auth()->user()->faculties;
+
+        return view('instructor-dashboard', compact('faculties'));
     }
 
     public function create()
@@ -54,6 +59,108 @@ class InstructorsController extends Controller
     {
         $courses = Auth::user()->courses;
 
-        return view('courses.schedule', compact('courses'));
+        return view('instructors.mycourses', compact('courses'));
+    }
+
+    public function myProfile($id)
+    {
+        $instructor = Instructor::findOrFail($id);
+
+        // dd($instructor);
+
+        return view('profiles.instructor_profile', compact('instructor'));
+    }
+
+    public function edit($id)
+    {
+        if (Auth::guard('instructor')->check()) {
+            $instructor = Instructor::findOrFail($id);
+            return view('profiles.instructor_profile_edit', compact('instructor'));
+        } else {
+            return redirect('/home');
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $instructor = auth()->user();
+
+        $this->validate($request, [
+            'first_name' => 'required|max:30|unique:instructors,first_name'.$instructor->id,
+            'last_name' => 'required|max:30|unique:instructors,last_name'.$instructor->id,
+            'email' => 'required|email|unique:instructors,email,'.$instructor->id,
+            'phone_number' => 'required|digits:11|unique:instructors,phone_number,'.$instructor->id,
+            'office_location' => 'required|max:4',
+            'about' => 'max:140'
+        ]);
+
+
+        if($request->hasFile('avatar')) {
+            if($instructor->avatar !== 'public/defaults/avatars/male.png' && $instructor->avatar !== 'public/defaults/avatars/female.png') {
+                $lastavatar = $instructor->avatar;
+                Storage::delete($lastavatar);
+            }
+            $instructor->update([
+                'avatar' => $request->avatar->store('public/uploads/avatars')
+            ]);
+        }
+
+        $instructor->first_name = ucfirst($request->first_name);
+        $instructor->last_name = ucfirst($request->last_name);
+        $instructor->full_name = $instructor->first_name . ' ' . $instructor->last_name;
+        $instructor->slug = str_slug($instructor->first_name . ' ' . $instructor->last_name, '-');
+        $instructor->email = $request->email;
+        $instructor->phone_number = $request->phone_number;
+        $instructor->office_location = $request->office_location;
+
+        if($request->has('password')) {
+            $instructor->password = bcrypt($request->password);
+        }
+
+        if($request->has('about')) {
+            $instructor->about = $request->about;
+        }
+
+        $instructor->save();
+
+        $request->session()->flash('success', 'Your profile was updated succesfully!');
+        return redirect(route('instructor.profile', ['id' => Auth::user()->id, 'slug' => Auth::user()->slug ]));
+    }
+
+    public function showCourse($slug)
+    {
+        $course = Course::whereSlug($slug)->with('students')->first();
+
+        return view('instructors.show_course', compact('course'));
+    }
+
+    public function classMail()
+    {
+        $years = Year::all();
+        $faculties = auth()->user()->faculties;
+
+
+        return view('instructors.emailForms.SendMailToClass', compact('years', 'faculties'));
+    }
+
+    public function prepareClassMail(Request $request)
+    {
+        $this->validate($request, [
+            'body' => 'required|min:10',
+            'year_id' => 'required',
+            'faculty_id' => 'required',
+            'subject' => 'max:100'
+        ]);
+
+        $instructor = auth()->user();
+        $students = Faculty::where('id', $request->faculty_id)->first()->students->where('year_id', $request->year_id);
+
+        foreach($students as $student){
+            \Mail::to($student)->queue(new InstructorEmailToClass($student, $request->body, $request->subject, $instructor));
+        }
+
+        \Session::flash('success', 'Emails Dispatched!');
+
+        return redirect()->back();
     }
 }

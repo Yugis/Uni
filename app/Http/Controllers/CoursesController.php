@@ -16,34 +16,9 @@ class CoursesController extends Controller
         $this->middleware('auth:web,instructor,admin');
     }
 
-    // Managing Attendance
-
-    // public function test()
-    // {
-    //     $course = Course::where(['name' => 'Image Processing'])->first();
-    //
-    //     $course->attendance = 23;
-    //
-    //     $course->save();
-    //     dump($course->students);
-    //     foreach($course->students as $student) {
-    //         $s = $student->courses->first()->pivot;
-    //         $s->attendance += 1;
-    //         $s->save();
-    //         dump($student->courses->first()->pivot->attendance);
-    //         dump($course->attendance);
-    //         if($student->courses->first()->pivot->attendance / $course->attendance * 100 < 50){
-    //             return 'Danger';
-    //         } else {
-    //             return 'Safe';
-    //         }
-    //     }
-    // }
-
-
     public function myCourses()
     {
-        $courses = Auth::user()->courses;
+        $courses = auth()->user()->courses()->orderBy('name', 'asc')->get();
 
         return view('courses.my_courses', compact('courses'));
     }
@@ -70,7 +45,16 @@ class CoursesController extends Controller
     public function show($slug)
     {
         $course = Course::whereSlug($slug)->first();
+        $student = auth()->user();
+        $grades = $student->courses()->whereSlug($slug)->first()->pivot->grades;
+        $attendance = $student->courses()->whereSlug($slug)->first()->pivot->attendance;
+        $quizzes = $student->quizzes()->where('course_id', $course->id)->get();
+        foreach ($quizzes as $quiz) {
+            $grades += $quiz->pivot->score;
+        }
+        $student->courses()->whereSlug($slug)->first()->pivot->save();
 
-        return view('courses.show', compact('course'));
+
+        return view('courses.show', compact('course', 'student', 'grades', 'attendance', 'quizzes'));
     }
 }

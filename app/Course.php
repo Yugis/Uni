@@ -31,7 +31,7 @@ class Course extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Student::class)->withPivot('completed', 'finals', 'grades', 'attendance')->withTimestamps();
+        return $this->belongsToMany(Student::class)->withPivot('finals', 'grades', 'attendance')->withTimestamps();
     }
 
     public function questions()

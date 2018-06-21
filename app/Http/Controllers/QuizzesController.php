@@ -6,6 +6,7 @@ use App\Quiz;
 use App\Course;
 use App\Faculty;
 use App\Question;
+use App\Mail\NewQuizCreated;
 use Illuminate\Http\Request;
 
 class QuizzesController extends Controller
@@ -46,8 +47,12 @@ class QuizzesController extends Controller
 
         $quiz->syncStudents();
 
+        foreach($course->students as $student){
+            \Mail::to($student)->queue(new NewQuizCreated($course, $quiz));
+        }
+
         \Session::flash('success', 'A quiz was created!');
 
-        return redirect('/instructor');
+        return redirect()->route('instructor.dashboard');
     }
 }

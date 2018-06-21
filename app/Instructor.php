@@ -28,21 +28,6 @@ class Instructor extends Authenticatable
         return $this->belongsToMany(Course::class);
     }
 
-    public function profile()
-    {
-        return $this->hasOne(Instructor_profile::class);
-    }
-
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
-
-    public function followers()
-    {
-        return $this->belongsToMany(Student::class, 'instructor_students')->withTimestamps();
-    }
-
     public function secret_id()
     {
         return $this->morphOne(SecretIds::class, 'owner');

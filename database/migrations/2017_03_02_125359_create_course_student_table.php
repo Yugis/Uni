@@ -20,7 +20,6 @@ class CreateCourseStudentTable extends Migration
       $table->integer('finals')->default(0)->unsigned();
       $table->integer('grades')->default(0)->unsigned();
       $table->integer('attendance')->default(0)->unsigned();
-      $table->boolean('completed')->default(false);
       $table->timestamps();
     });
   }

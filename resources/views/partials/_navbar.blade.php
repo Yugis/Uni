@@ -17,25 +17,7 @@
         </div>
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
-                @if (Auth::guest())
-                <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Login <span class="caret"></span></a>
-
-                      <ul class="dropdown-menu" role="menu">
-                      <li><a href="{{ url('/login') }}">As a Student</a></li>
-                        <li><a href="{{ route('instructor.login') }}">As an Instructor</a></li>
-                      </ul>
-                    </li>
-
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Register<span class="caret"></span></a>
-
-                      <ul class="dropdown-menu" role="menu">
-                      <li><a href="{{ url('/register') }}">As a Student</a></li>
-                        <li><a href="{{ route('instructor.submit.register') }}">As an Instructor</a></li>
-                      </ul>
-                    </li>
-                @else
+                @unless(Auth::guest())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding-left:10px">
                         <img src="{{ Storage::url(Auth::user()->avatar)}}" width="26px" height="26px" style="border-radius: 50px; background-color: ghostwhite;">
@@ -81,7 +63,7 @@
                             </li>
                         </ul>
                     </li>
-                @endif
+                @endunless
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -94,7 +76,7 @@
             @elseif (Auth::guard('admin')->check())
                 <li role="presentation" class="{{Request::is('manager') ? "active" : "" }}"><a href="/manager">Home</a></li>
             @elseif(Auth::guard('web')->check())
-              <li role="presentation" class="{{Request::is('home') ? "active" : "" }}"><a href="/home">Home</a></li>
+              <li role="presentation" class="{{Request::is('schedule') ? "active" : "" }}"><a href="/schedule">Home</a></li>
             @endif
             </ul>
         </div>

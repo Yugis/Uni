@@ -53,8 +53,6 @@ trait RegistersInstructors {
 
         SecretIds::where('secret_id', $request->job_id)->first()->update(['owner_id' => $instructor->id]);
 
-        $instructor->profile()->create(['instructor_id' => $instructor->id]);
-
         Auth::guard('instructor')->login($instructor);
     }
 }

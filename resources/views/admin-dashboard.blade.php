@@ -3,7 +3,7 @@
 @section('admin.content')
     <div class="panels-flex col-md-9">
         <div class="animated fadeInUp" data-dashboard-panel>
-            <div class="panel panel-danger">
+            <div class="panel panel-primary">
                 <div class="panel-heading">First Year</div>
                 <div class="panel-top">
                     <div class="panel-body">
@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="animated fadeInUp" data-dashboard-panel>
-            <div class="panel panel-danger">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Second Year</div>
                 <div class="panel-top">
                     <div class="panel-body">
@@ -39,7 +39,7 @@
             </div>
         </div>
         <div class="animated fadeInUp" data-dashboard-panel>
-            <div class="panel panel-danger">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Third Year</div>
                 <div class="panel-top">
                     <div class="panel-body">
@@ -57,7 +57,7 @@
             </div>
         </div>
         <div class="animated fadeInUp" data-dashboard-panel>
-            <div class="panel panel-danger">
+            <div class="panel panel-primary">
                 <div class="panel-heading">Fourth Year</div>
                 <div class="panel-top">
                     <div class="panel-body">

@@ -24,22 +24,12 @@ class Student extends Authenticatable
 
     public function courses()
     {
-        return $this->belongsToMany(Course::class)->withPivot('completed', 'finals', 'grades', 'attendance')->withTimestamps();
-    }
-
-    public function profile()
-    {
-        return $this->hasOne(Student_profile::class);
+        return $this->belongsToMany(Course::class)->withPivot('finals', 'grades', 'attendance')->withTimestamps();
     }
 
     public function year()
     {
         return $this->belongsTo(Year::class);
-    }
-
-    public function isFollowing()
-    {
-        return $this->belongsToMany(Instructor::class, 'instructor_students')->withTimestamps();
     }
 
     public function secret_id()

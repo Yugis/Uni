@@ -17,9 +17,7 @@
         <!-- Styles -->
         <style>
             html, body {
-                /*background: linear-gradient(to top, #33ccff 0%, #ff99cc 100%);*/
-                /*background: linear-gradient(to bottom, #200122, #6f0000);*/
-                background: #ccc;
+                background: #1f2223;
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
@@ -72,7 +70,6 @@
                 width: 100%;
                 top: 30px;
                 z-index: 1;
-                border-bottom: #fff 1px solid;
             }
 
             header .container {
@@ -101,7 +98,6 @@
                 align-items: center;
                 display: flex;
                 justify-content: center;
-                border-bottom: #fff 1px solid;
             }
 
             #branding {
@@ -236,6 +232,11 @@
                 height: 80%;
                 width: 100%;
                 border: 1px #fff solid;
+            }
+
+            #map {
+                height: 100%;
+                width: 100%;
             }
 
             .copyright {
@@ -1023,7 +1024,7 @@
             @elseif (Auth::guard('admin')->check())
                 <a href="{{ url('/manager') }}">Dashboard</a>
             @elseif (Auth::guard('web')->check())
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/schedule') }}">Home</a>
             @else
                 <a href="#" id="signInButton">Sign In</a>
             @endif
@@ -1039,26 +1040,26 @@
                       <li>
                           <a href="">Home</a>
                           <ul class="submenu">
-                            <li><a href="">Introducing The Acadmey</a></li>
-                            <li><a href="">International Academy Links</a></li>
-                            <li><a href="">Admission System In The Academy</a></li>
-                            <li><a href="">Student Facility</a></li>
-                            <li><a href="">Library Of The Academy</a></li>
-                            <li><a href="">The Student's Union</a></li>
+                            <li><a href="{{ route('pages.index', ['name' => 'introducing-the-acadmey']) }}">Introducing The Acadmey</a></li>
+                            <li><a href="{{ route('pages.index', ['name' => 'international-academy-links']) }}">International Academy Links</a></li>
+                            <li><a href="{{ route('pages.index', ['name' => 'admission-system-in-the-academy']) }}">Admission System In The Academy</a></li>
+                            <li><a href="{{ route('pages.index', ['name' => 'student-facility']) }}">Student Facility</a></li>
+                            <li><a href="{{ route('pages.index', ['name' => 'library-of-the-academy']) }}">Library Of The Academy</a></li>
+                            <li><a href="{{ route('pages.index', ['name' => 'the-student\'s-union']) }}">The Student's Union</a></li>
                           </ul>
                       </li>
-                      <li><a href="">Training Center</a></li>
+                      <li><a href="{{ route('pages.index', ['name' => 'training-center']) }}">Training Center</a></li>
                       <li>
                         <a href="">Departments</a>
                         <ul class="submenu">
-                          <li><a href="">Journalism Department</a></li>
-                          <li><a href="">Business Administration Department</a></li>
-                          <li><a href="">Mechanical Engineering Department</a></li>
-                          <li><a href="">Computer Science &amp; Information Techology Department</a></li>
-                          <li><a href="">Electrical Engingeering Department</a></li>
+                          <li><a href="{{ route('pages.index', ['name' => 'journalism']) }}">Journalism Department</a></li>
+                          <li><a href="{{ route('pages.index', ['name' => 'business-administration']) }}">Business Administration Department</a></li>
+                          <li><a href="{{ route('pages.index', ['name' => 'mechanical-engineering']) }}">Mechanical Engineering Department</a></li>
+                          <li><a href="{{ route('pages.index', ['name' => 'computer-science']) }}">Computer Science &amp; Information Techology Department</a></li>
+                          <li><a href="{{ route('pages.index', ['name' => 'electrical-engineering']) }}">Electrical Engingeering Department</a></li>
                         </ul>
                       </li>
-                      <li>
+                      {{-- <li>
                         <a href="">Academy Teaching Staff</a>
                         <ul class="submenu">
                           <li><a href="">Journalism</a></li>
@@ -1067,8 +1068,8 @@
                           <li><a href="">Mechanical Engineering</a></li>
                           <li><a href="">Electrical Engingeering</a></li>
                         </ul>
-                      </li>
-                      <li><a href="">The Dean's Word</a></li>
+                      </li> --}}
+                      <li><a href="{{ route('pages.index', ['name' => 'deans-word']) }}">The Dean's Word</a></li>
                     </ul>
                 </div>
             </div>
@@ -1210,7 +1211,9 @@
                     </div>
 
                     <div class="mapper">
-
+                        <div id="map">
+                            
+                        </div>        
                     </div>
                 </div>
             </section>
@@ -1222,7 +1225,18 @@
                 <a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
             </section>
         </footer>
+        
+        <script>
+            function initMap() {
+                var options = {
+                    zoom: 16,
+                    center: {lat:29.940130,lng:30.890644}
+                }
 
+                var map = new google.maps.Map(document.getElementById('map'), options);
+            }
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkB_2AL0Mp16a5wreVMKX2Nmu6lEuxCFM&callback=initMap" type="text/javascript"></script>
         <script src="{{ elixir('js/app.js') }}"></script>
         <script>
             const sigInButton = document.querySelector('#signInButton');

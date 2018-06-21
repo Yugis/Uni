@@ -40,6 +40,12 @@
     			</div>
     		@endif
 
+        @if(Auth::guard('instructor')->check())
+            @include('partials._instructor_sidebar')
+        @elseif(Auth::guard('web')->check()) 
+            @include('partials._student_sidebar')
+        @endif
+
         @yield('content')
 
     </div>

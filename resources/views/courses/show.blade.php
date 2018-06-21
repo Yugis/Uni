@@ -3,29 +3,33 @@
 @section('content')
 
 
-    <div class="container" id="admin-dashboard-heading">
+    <div class="col-md-8 col-md-offset-3" id="dashboard-heading">
         <h1> {{ $course->name }} </h1>
-        @if(Auth::guard('instructor')->check())
-            <a href="{{ route('quiz.create', $course->slug) }}" class="fixed-btn">Create A Quiz</a>
-        @endif
     </div>
-    <div class="container">
+    <div class="col-md-8 col-md-offset-3">
+        <h3>Your Marks For This Course:</h3>
         <table class="table .table-hover">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Faculty</th>
-                    <th>Email</th>
+                    <th>Total Grades</th>
+                    <th>Attendance</th>
+                    @foreach($quizzes as $quiz)
+                        <th> {{ $quiz->quiz_name }} </th>
+                    @endforeach
                 </tr>
             </thead>
             <tbody>
-                @foreach ($course->students as $student)
-                    <tr>
-                        <td><a style="text-decoration:none;" href="{{ route('student.profile', ['id' => $student->id, 'slug' => $student->slug ]) }}">{{ $student->full_name }}</a></td>
-                        <td>{{ $student->faculty()->first()->name }}</td>
-                        <td>{{ $student->email }}</td>
-                    </tr>
-                @endforeach
+               <tr>
+                   <td>
+                       {{ $grades }}
+                   </td>
+                   <td>
+                       {{ $attendance }}
+                   </td>
+                   @foreach($quizzes as $quiz)
+                        <td>{{ $quiz->pivot->score }}</td>
+                   @endforeach
+               </tr>
             </tbody>
         </table>
 

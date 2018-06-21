@@ -19,7 +19,7 @@
 				</div>
 
 				<div class="form-group{{ $errors->has('admin_id') ? ' has-error' : '' }}">
-					<label for="admin_id" class="col-md-4 control-label">Admin Id:</label>
+					<label for="admin_id" class="col-md-4 control-label">Admin ID:</label>
 					<input id="admin_id" type="password" class="form-control" name="admin_id" placeholder="Please provide the ID number of the new Admin..." required>
 				</div>
 

@@ -54,7 +54,7 @@ class ExaminationsController extends Controller
 
         if($pivot->completed) {
             \Session::flash('fail', "Sorry, you can't take a quiz more than once!" );
-            return redirect('/home');
+            return redirect()->route('home');
         }
 
         $quiz = Quiz::getActiveQuiz([$course_id])->where('quiz_name', $quiz_name)->first()->load('questions');

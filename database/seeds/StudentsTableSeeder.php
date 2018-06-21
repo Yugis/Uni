@@ -12,6 +12,7 @@ class StudentsTableSeeder extends Seeder
     public function run()
     {
         $avatar = 'public/defaults/avatars/male.png';
+        $avatar2 = 'public/defaults/avatars/female.png';
 
         $student = new \App\Student();
         $student->first_name = 'Omar';
@@ -30,10 +31,6 @@ class StudentsTableSeeder extends Seeder
 
         \App\SecretIds::where(['secret_id' => 55, 'owner_id' => null])->first()->update(['owner_id' => $student->id]);
 
-        $student->profile()->create(['student_id' => $student->id]);
-
-        $avatar2 = 'public/defaults/avatars/female.png';
-
         $student2 = new \App\Student();
         $student2->first_name = 'Angie';
         $student2->last_name = 'Varona';
@@ -51,8 +48,6 @@ class StudentsTableSeeder extends Seeder
 
         \App\SecretIds::where(['secret_id' => 66, 'owner_id' => null])->first()->update(['owner_id' => $student2->id]);
 
-        $student2->profile()->create(['student_id' => $student2->id]);
-
         $student3 = new \App\Student();
         $student3->first_name = 'Emma';
         $student3->last_name = 'Weasly';
@@ -64,13 +59,11 @@ class StudentsTableSeeder extends Seeder
         $student3->phone_number = '01053665774';
         $student3->password = bcrypt('password');
         $student3->faculty_id = 2;
-        $student3->year_id = 4;
+        $student3->year_id = 2;
         $student3->save();
-        $student3->courses()->attach(\App\Course::where(['faculty_id' => 2, 'year_id' => 4])->get());
+        $student3->courses()->attach(\App\Course::where(['faculty_id' => 2, 'year_id' => 2])->get());
 
         \App\SecretIds::where(['secret_id' => 60, 'owner_id' => null])->first()->update(['owner_id' => $student3->id]);
-
-        $student3->profile()->create(['student_id' => $student3->id]);
 
         $student4 = new \App\Student();
         $student4->first_name = 'Omar';
@@ -89,8 +82,6 @@ class StudentsTableSeeder extends Seeder
 
         \App\SecretIds::where(['secret_id' => 61, 'owner_id' => null])->first()->update(['owner_id' => $student4->id]);
 
-        $student4->profile()->create(['student_id' => $student4->id]);
-
         $student5 = new \App\Student();
         $student5->first_name = 'Abdelrahman';
         $student5->last_name = 'Waheed';
@@ -107,8 +98,6 @@ class StudentsTableSeeder extends Seeder
         $student5->courses()->attach(\App\Course::where(['faculty_id' => 2, 'year_id' => 4])->get());
 
         \App\SecretIds::where(['secret_id' => 62, 'owner_id' => null])->first()->update(['owner_id' => $student5->id]);
-
-        $student5->profile()->create(['student_id' => $student5->id]);
 
         $student6 = new \App\Student();
         $student6->first_name = 'Samy';
@@ -127,6 +116,21 @@ class StudentsTableSeeder extends Seeder
 
         \App\SecretIds::where(['secret_id' => 63, 'owner_id' => null])->first()->update(['owner_id' => $student6->id]);
 
-        $student6->profile()->create(['student_id' => $student6->id]);
+        $student7 = new \App\Student();
+        $student7->first_name = 'Gordon';
+        $student7->last_name = 'Ramsey';
+        $student7->full_name = 'Gordon Ramsey';
+        $student7->slug = 'gordon-ramsey';
+        $student7->gender = 'male';
+        $student7->avatar = $avatar;
+        $student7->email = 'ramsey@e.com';
+        $student7->phone_number = '01356256274';
+        $student7->password = bcrypt('password');
+        $student7->faculty_id = 2;
+        $student7->year_id = 1;
+        $student7->save();
+        $student7->courses()->attach(\App\Course::where(['faculty_id' => 2, 'year_id' => 1])->get());
+
+        \App\SecretIds::where(['secret_id' => 67, 'owner_id' => null])->first()->update(['owner_id' => $student7->id]);
     }
 }

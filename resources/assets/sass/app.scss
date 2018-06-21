@@ -7,11 +7,222 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// New Sidebar
+main {
+  position: relative;
+  height: 100vh;
+}
+main .helper {
+  background: rgba(0, 0, 0, 0.2);
+  color: #ffea92;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  padding: 1.2em 2em;
+  text-align: center;
+  border-radius: 20px;
+  font-size: 2em;
+  font-weight: bold;
+}
+main .helper span {
+  color: rgba(0, 0, 0, 0.2);
+  font-size: 0.4em;
+  display: block;
+}
+.menu {
+  background: #800000;
+  height: 100%;
+  width: 240px;
+  position: absolute;
+  top: 54px;
+  left: 0;
+  z-index: 5;
+  outline: none;
+  color: white;
+}
+.menu .avatar {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2em 0.5em;
+  text-align: center;
+}
+.menu .avatar img {
+  width: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #ffea92;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+  background: white;
+}
+.menu .avatar h2 {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+.menu ul {
+  list-style: none;
+  padding: 0.5em 0;
+  margin: 0;
+  a {
+    text-decoration:none;
+    color:white;
+  }
+}
+.menu ul li {
+  padding: 0.5em 1em 0.5em 3em;
+  font-size: 0.95em;
+  font-weight: regular;
+  background-repeat: no-repeat;
+  background-position: left 15px center;
+  background-size: auto 20px;
+  transition: all 0.15s linear;
+  cursor: pointer;
+}
+.menu ul li.icon-dashboard {
+  background-image: url("http://www.entypo.com/images//clipboard.svg");
+}
+.menu ul .active {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.menu ul li.icon-customers {
+  background-image: url("http://www.entypo.com/images//blackboard.svg");
+}
+.menu ul li.icon-users {
+  background-image: url("http://www.entypo.com/images//users.svg");
+}
+.menu ul li.icon-email {
+  background-image: url("http://www.entypo.com/images//email.svg");
+}
+.menu ul li:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.menu ul li:focus {
+  outline: none;
+}
+@media screen and (max-width: 900px) and (min-width: 400px) {
+  body {
+    padding-left: 90px;
+  }
+  .menu {
+    width: 90px;
+  }
+  .menu .avatar {
+    padding: 0.5em;
+    position: relative;
+  }
+  .menu .avatar img {
+    width: 60px;
+  }
+  .menu .avatar h2 {
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    margin: 0;
+    min-width: 200px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.4);
+    transform: translate3d(-20px, -50%, 0);
+    transition: all 0.15s ease-in-out;
+  }
+  .menu .avatar:hover h2 {
+    opacity: 1;
+    transform: translate3d(0px, -50%, 0);
+  }
+  .menu ul li {
+    height: 60px;
+    background-position: center center;
+    background-size: 30px auto;
+    position: relative;
+  }
+  .menu ul li span {
+    opacity: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+    top: 50%;
+    left: 80px;
+    transform: translate3d(-15px, -50%, 0);
+    transition: all 0.15s ease-in-out;
+  }
+  .menu ul li span:before {
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid rgba(0, 0, 0, 0.5);
+    transform: translateY(-50%);
+  }
+  .menu ul li:hover span {
+    opacity: 1;
+    transform: translate3d(0px, -50%, 0);
+  }
+}
+@media screen and (max-width: 400px) {
+  body {
+    padding-left: 0;
+  }
+  .menu {
+    width: 230px;
+    box-shadow: 0 0 0 100em rgba(0, 0, 0, 0);
+    transform: translate3d(-230px, 0, 0);
+    transition: all 0.3s ease-in-out;
+  }
+  .menu .smartphone-menu-trigger {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 100%;
+    background: #5bc995;
+  }
+  .menu .smartphone-menu-trigger:before,
+  .menu .smartphone-menu-trigger:after {
+    content: '';
+    width: 50%;
+    height: 2px;
+    background: #fff;
+    border-radius: 10px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+  .menu .smartphone-menu-trigger:after {
+    top: 55%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+  .menu ul li {
+    padding: 1em 1em 1em 3em;
+    font-size: 1.2em;
+  }
+  .menu:focus {
+    transform: translate3d(0, 0, 0);
+    box-shadow: 0 0 0 100em rgba(0, 0, 0, 0.6);
+  }
+  .menu:focus .smartphone-menu-trigger {
+    pointer-events: none;
+  }
+}
+
+// End Sidebar
+
 html, body {
     height: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-color: $body-bg;
+}
+
+.site-wrap {
+    max-width: 700px;
+    margin: 100px auto;
+    background:white;
+    padding:40px;
+    text-align: justify;
 }
 
 a:hover, a:focus {
@@ -94,7 +305,22 @@ a:hover, a:focus {
     color: #fff;
     width: 100%;
     padding: 7rem;
-    background: linear-gradient(to top, #000428, #004e92);
+    background: linear-gradient(to right, #2980b9, #6dd5fa, #ffffff);
+
+    h1 {
+        font-size: 48px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+}
+
+#dashboard-heading {
+    text-align: center;
+    color: #fff;
+    padding: 7rem;
+    background: linear-gradient(to right, #2980b9, #6dd5fa, #ffffff);
 
     h1 {
         font-size: 48px;
@@ -109,7 +335,6 @@ a:hover, a:focus {
     margin: 1rem;
 
     .panel-heading {
-        background: linear-gradient(to top, #000428, #004e92);
         border: none;
     }
 
@@ -256,7 +481,6 @@ a:hover, a:focus {
     justify-content: space-between;
     text-align: center;
     align-items: flex-start;
-    box-shadow: 1px 0px 20px 4px rgba(0,0,0,0.3);
 }
 
 .templinks {
@@ -319,15 +543,14 @@ a:hover, a:focus {
 }
 
 .table {
-    background: gainsboro;
     color: black;
     font-size: 1.6rem;
     text-align: center;
     font-family: sans-serif;
-    border: 1px solid #b22222;
+    border: 1px solid #3097d1;
 
     th {
-        background: firebrick;
+        background: rgb(48, 151, 209);
         color: white;
         text-align: center;
         border: solid 1px #999;
@@ -335,7 +558,7 @@ a:hover, a:focus {
     }
 
     td {
-        border: 1px solid firebrick;
+        border: 1px solid rgb(48, 151, 209);
     }
 }
 

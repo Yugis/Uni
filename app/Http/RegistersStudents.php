@@ -45,8 +45,6 @@ trait RegistersStudents {
 
         SecretIds::where(['secret_id' => $request->student_id, 'owner_id' => null])->first()->update(['owner_id' => $student->id]);
 
-        $student->profile()->create(['student_id' => $student->id]);
-
         Auth::login($student);
     }
 

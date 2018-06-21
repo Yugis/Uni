@@ -18,7 +18,7 @@
                 @foreach ($students as $student)
                     <tr>
                         <td><img src="{{ Storage::url($student->avatar)}}" width="80px" height="80px" style="border-radius: 80px"></td>
-                        <td><a href="{{ route('student.profile', ['id' => $student->id, 'slug' => $student->slug ]) }}">{{ $student->full_name }}</a></td>
+                        <td>{{ $student->full_name }}</td>
                         <td>{{ $student->faculty()->first()->name }}</td>
                         <td>{{ $student->email }}</td>
                     </tr>

@@ -2,10 +2,8 @@
 
 @section('content')
 <div class="container">
-  <div class="container-index">
-  	<div class="course-index-heading">
-    		<h2> These are all the courses you have for this year, good luck! </h2>
-    </div>
+  <div class="col-md-6 col-md-offset-4">
+  		<h2 style="color:black;"> A list of your courses </h2>
     <div class="students-index-flex">
       <table class="table">
         <thead>
@@ -18,7 +16,7 @@
         <tbody>
             @foreach ($courses as $course)
               <tr>
-                <td><a href="{{ route('courses.show', ['name' => $course->slug]) }}">{{ $course->name }}</a></td>
+                <td><a href="{{ route('student.course.show', ['name' => $course->slug]) }}">{{ $course->name }}</a></td>
                 <td>{{ $course->appointment }}</td>
                 <td>{{ $course->room_id }}</td>
              </tr>
